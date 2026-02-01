@@ -1,0 +1,270 @@
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.news-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.news-add-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.news-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+
+.news-card:hover .news-actions {
+    opacity: 1;
+}
+
+.news-action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.news-action-btn.edit {
+    background: rgba(52, 152, 219, 0.9);
+}
+
+.news-action-btn.edit:hover {
+    background: #2980b9;
+    transform: scale(1.1);
+}
+
+.news-action-btn.delete {
+    background: rgba(231, 76, 60, 0.9);
+}
+
+.news-action-btn.delete:hover {
+    background: #c0392b;
+    transform: scale(1.1);
+}
+
+.news-reader {
+    width: 700px !important;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border);
+    padding: 0 !important;
+    overflow: hidden;
+    position: relative;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.news-reader-header {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.news-reader-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.news-reader-meta {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.news-reader-meta h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    color: white;
+    line-height: 1.2;
+}
+
+.news-reader-date {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.news-reader-body {
+    padding: 24px;
+    overflow-y: auto;
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.news-reader-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    backdrop-filter: blur(5px);
+    transition: background 0.2s;
+    z-index: 20;
+}
+
+.news-reader-close:hover {
+    background: rgba(231, 76, 60, 0.9);
+}
+
+.news-editor {
+    width: 550px !important;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px !important;
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow-y: auto;
+}
+
+.news-editor h2 {
+    margin: 0 0 8px 0;
+    font-size: 22px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.news-editor .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.news-editor label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.news-editor input,
+.news-editor textarea {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.news-editor input:focus,
+.news-editor textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.news-editor .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.news-editor .btn-cancel {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.news-editor .btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.news-editor .btn-confirm {
+    background: var(--primary);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: filter 0.2s;
+}
+
+.news-editor .btn-confirm:hover {
+    filter: brightness(1.1);
+}

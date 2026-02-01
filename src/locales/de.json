@@ -1,0 +1,113 @@
+{
+    "nav": {
+        "home": "Startseite",
+        "profiles": "Installationen",
+        "monitoring": "Überwachung",
+        "accounts": "Konten",
+        "settings": "Einstellungen",
+        "installedProfiles": "Installierte Installationen"
+    },
+    "profiles": {
+        "myProfiles": "Meine Installationen",
+        "installNew": "Installieren"
+    },
+    "monitoring": {
+        "addServer": "Server hinzufügen",
+        "noServers": "Keine Server hinzugefügt",
+        "enterName": "Server Name:",
+        "enterIP": "Server IP:",
+        "deleteConfirm": "Möchten Sie diesen Server wirklich löschen?"
+    },
+    "news": {
+        "launcher": "Launcher Nachrichten",
+        "minecraft": "Minecraft Nachrichten"
+    },
+    "login": {
+        "welcome": "Willkommen"
+    },
+    "home": {
+        "title": "Spielen",
+        "selectProfile": "Installation auswählen",
+        "noProfiles": "Keine Versionen gefunden",
+        "deleteProfile": "Installation löschen",
+        "deleteConfirm": "Möchten Sie diese Installation wirklich löschen?",
+        "deleteSuccess": "Installation erfolgreich gelöscht!",
+        "version": "Version",
+        "releases": "Releases",
+        "snapshots": "Snapshots",
+        "beta": "Beta",
+        "loading": "Laden...",
+        "modloader": "Mod-Loader",
+        "selectVersion": "Version auswählen",
+        "play": "SPIELEN",
+        "close": "SCHLIESSEN",
+        "downloading": "Herunterladen...",
+        "launching": "Starten...",
+        "running": "Spiel läuft"
+    },
+    "downloads": {
+        "title": "Downloads",
+        "tabs": {
+            "versions": "Versionen",
+            "modpacks": "Modpacks",
+            "mods": "Mods"
+        },
+        "searchPlaceholder": "Modpacks suchen...",
+        "platform": "Plattform",
+        "sort": "Sortieren nach",
+        "sortPopularity": "Beliebtheit",
+        "sortDownloads": "Downloads",
+        "sortLatest": "Neueste",
+        "install": "Installieren",
+        "installed": "Installiert!",
+        "selectVersion": "Version auswählen",
+        "searchModsPlaceholder": "Mods suchen...",
+        "downloadMod": "Herunterladen"
+    },
+    "accounts": {
+        "title": "Konten",
+        "microsoft": "Mit Microsoft anmelden",
+        "offline": "Offline",
+        "usernamePlaceholder": "Benutzername",
+        "noAccount": "Kein Konto",
+        "remove": "Konto löschen",
+        "selected": "Ausgewählt",
+        "microsoftType": "Microsoft",
+        "offlineType": "Offline"
+    },
+    "settings": {
+        "title": "Einstellungen",
+        "appearance": "Erscheinungsbild",
+        "theme": "Design",
+        "themeDesc": "Farbschema auswählen",
+        "themeDark": "Dunkel",
+        "themeLight": "Hell",
+        "accentColor": "Akzentfarbe",
+        "accentColorDesc": "Wählen Sie die Akzentfarbe der Benutzeroberfläche",
+        "language": "Sprache",
+        "languageDesc": "Oberflächensprache",
+        "game": "Spiel",
+        "gamePath": "Spielpfad",
+        "gamePathDesc": ".minecraft-Ordner",
+        "browse": "Durchsuchen",
+        "java": "Java",
+        "memory": "Arbeitsspeicher",
+        "memoryDesc": "RAM-Zuweisung für das Spiel",
+        "minMemory": "Minimum:",
+        "maxMemory": "Maximum:",
+        "javaPath": "Java-Pfad",
+        "javaPathDesc": "Leer lassen für automatische Suche",
+        "selectJava": "Java-Ausführbare Datei auswählen",
+        "javaArgs": "Java-Argumente",
+        "javaArgsDesc": "Zusätzliche JVM-Parameter",
+        "save": "Einstellungen speichern",
+        "saved": "Einstellungen gespeichert!"
+    },
+    "errors": {
+        "noAccount": "Wählen Sie ein Konto zum Spielen aus",
+        "noVersion": "Wählen Sie eine Spielversion aus",
+        "launchFailed": "Spiel konnte nicht gestartet werden",
+        "loginFailed": "Anmeldung fehlgeschlagen",
+        "invalidUsername": "Gültigen Namen eingeben (3-16 Zeichen, Buchstaben, Zahlen, _)"
+    }
+}

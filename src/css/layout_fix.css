@@ -1,0 +1,81 @@
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    
+}
+
+.title-bar {
+    flex: 0 0 var(--title-bar-height);
+    width: 100%;
+    z-index: 2000;
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.sidebar {
+    flex: 0 0 260px;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.login-overlay {
+    height: calc(100vh - var(--title-bar-height));
+    top: var(--title-bar-height);
+}
+
+#progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 260px;
+    
+    width: auto;
+    right: 0;
+    max-width: none !important;
+    
+    padding: 12px 24px;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#progress-container.hidden {
+    display: none !important;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 11px;
+    color: var(--text-secondary);
+}

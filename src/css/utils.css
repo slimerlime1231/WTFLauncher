@@ -1,0 +1,32 @@
+
+.hidden {
+    display: none !important;
+}
+
+.main-container.blur {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.login-overlay {
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+}
+
+input,
+textarea {
+    -webkit-app-region: no-drag !important;
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    cursor: text !important;
+    pointer-events: auto !important;
+    z-index: 10000 !important;
+    
+    position: relative;
+    
+}
+
+.offline-input {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+}

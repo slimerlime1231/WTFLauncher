@@ -1,0 +1,142 @@
+{
+    "nav": {
+        "home": "Home",
+        "profiles": "Installazioni",
+        "monitoring": "Monitoraggio",
+        "accounts": "Account",
+        "settings": "Impostazioni",
+        "installedProfiles": "Installazioni Installate"
+    },
+    "profiles": {
+        "myProfiles": "Le Mie Installazioni",
+        "installNew": "Installa Nuovo",
+        "delete": "Elimina Installazione",
+        "confirmDelete": "Sei sicuro di voler eliminare questa installazione?",
+        "edit": "Modifica Installazione",
+        "enterName": "Inserisci nome installazione:",
+        "settings": "Impostazioni Installazione",
+        "memory": "Memoria",
+        "minMemory": "Minima:",
+        "maxMemory": "Massima:",
+        "icon": "Icona",
+        "changeIcon": "Cambia Icona",
+        "openFolder": "Apri Cartella"
+    },
+    "monitoring": {
+        "addServer": "Aggiungi Server",
+        "noServers": "Nessun server aggiunto",
+        "enterName": "Nome Server:",
+        "enterIP": "IP Server:",
+        "deleteConfirm": "Sei sicuro di voler eliminare questo server?",
+        "play": "Gioca",
+        "online": "Online",
+        "offline": "Offline",
+        "players": "Giocatori",
+        "settings": "Impostazioni",
+        "delete": "Elimina",
+        "changeIconQuestion": "Cambia icona del server?"
+    },
+    "news": {
+        "launcher": "Notizie Launcher",
+        "minecraft": "Notizie Minecraft",
+        "add": "Aggiungi notizia",
+        "editorTitle": "Editor Notizie",
+        "deleteConfirm": "Eliminare questa notizia?"
+    },
+    "login": {
+        "welcome": "Benvenuto"
+    },
+    "home": {
+        "title": "Gioca",
+        "version": "Versione",
+        "releases": "Versioni",
+        "snapshots": "Snapshots",
+        "beta": "Beta",
+        "loading": "Caricamento...",
+        "modloader": "Mod Loader",
+        "selectVersion": "Seleziona versione",
+        "selectProfile": "Seleziona installazione",
+        "noProfiles": "Nessuna versione trovata",
+        "deleteProfile": "Elimina Installazione",
+        "deleteConfirm": "Sei sicuro di voler eliminare questa installazione?",
+        "deleteSuccess": "Installazione eliminata con successo!",
+        "play": "GIOCA",
+        "close": "CHIUDI",
+        "downloading": "Scaricamento...",
+        "launching": "Avvio...",
+        "running": "Il gioco è in esecuzione"
+    },
+    "downloads": {
+        "title": "Download",
+        "tabs": {
+            "versions": "Versioni",
+            "modpacks": "Modpack",
+            "mods": "Mod",
+            "resourcepacks": "Pacchetti risorse"
+        },
+        "searchPlaceholder": "Cerca modpack...",
+        "platform": "Piattaforma",
+        "sort": "Ordina per",
+        "sortPopularity": "Popolarità",
+        "sortDownloads": "Download",
+        "sortLatest": "Ultimi",
+        "install": "Installa",
+        "installed": "Installato!",
+        "selectVersion": "Seleziona Versione",
+        "searchModsPlaceholder": "Cerca mod...",
+        "searchResourcePacksPlaceholder": "Cerca pacchetti risorse...",
+        "downloadMod": "Scarica",
+        "resourcepacks": "Pacchetti risorse"
+    },
+    "accounts": {
+        "title": "Account",
+        "microsoft": "Accedi con Microsoft",
+        "offline": "Offline",
+        "usernamePlaceholder": "Nome utente",
+        "noAccount": "Nessun account",
+        "remove": "Rimuovi account",
+        "selected": "Selezionato",
+        "microsoftType": "Microsoft",
+        "offlineType": "Offline"
+    },
+    "settings": {
+        "title": "Impostazioni",
+        "appearance": "Aspetto",
+        "theme": "Tema",
+        "themeDesc": "Scegli schema colori",
+        "themeDark": "Scuro",
+        "themeLight": "Chiaro",
+        "accentColor": "Colore accento",
+        "accentColorDesc": "Scegli il colore dell'accento dell'interfaccia",
+        "language": "Lingua",
+        "languageDesc": "Lingua interfaccia",
+        "game": "Gioco",
+        "gamePath": "Percorso gioco",
+        "gamePathDesc": "Cartella .minecraft",
+        "browse": "Sfoglia",
+        "java": "Java",
+        "memory": "Memoria",
+        "memoryDesc": "Allocazione RAM per il gioco",
+        "minMemory": "Minima:",
+        "maxMemory": "Massima:",
+        "javaPath": "Percorso Java",
+        "javaPathDesc": "Lascia vuoto per la ricerca automatica",
+        "selectJava": "Seleziona eseguibile Java",
+        "javaArgs": "Argomenti Java",
+        "javaArgsDesc": "Parametri JVM aggiuntivi",
+        "save": "Salva impostazioni",
+        "saved": "Impostazioni salvate!"
+    },
+    "errors": {
+        "noAccount": "Seleziona un account per giocare",
+        "noVersion": "Seleziona una versione del gioco",
+        "launchFailed": "Avvio del gioco fallito",
+        "loginFailed": "Accesso fallito",
+        "invalidUsername": "Inserisci un nome valido (3-16 caratteri, lettere, numeri, _)"
+    },
+    "modal": {
+        "save": "Salva",
+        "cancel": "Annulla",
+        "ok": "OK"
+    }
+}

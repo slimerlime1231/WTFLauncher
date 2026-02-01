@@ -1,0 +1,53 @@
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('electronAPI', {
+    minimize: () => ipcRenderer.send('window-minimize'),
+    maximize: () => ipcRenderer.send('window-maximize'),
+    close: () => ipcRenderer.send('window-close'),
+
+    getSettings: () => ipcRenderer.invoke('get-settings'),
+    saveSettings: (settings) => ipcRenderer.invoke('save-settings', settings),
+    selectFolder: () => ipcRenderer.invoke('select-folder'),
+    selectFile: (options) => ipcRenderer.invoke('select-file', options),
+    openFolder: (path) => ipcRenderer.invoke('open-folder', path),
+    selectIcon: () => ipcRenderer.invoke('select-icon'),
+
+    getAccounts: () => ipcRenderer.invoke('get-accounts'),
+    getSelectedAccount: () => ipcRenderer.invoke('get-selected-account'),
+    saveAccounts: (accounts) => ipcRenderer.invoke('save-accounts', accounts),
+    selectAccount: (accountId) => ipcRenderer.invoke('select-account', accountId),
+    loginMicrosoft: () => ipcRenderer.invoke('login-microsoft'),
+    loginOffline: (username) => ipcRenderer.invoke('login-offline', username),
+    removeAccount: (accountId) => ipcRenderer.invoke('remove-account', accountId),
+
+    getVersions: () => ipcRenderer.invoke('get-versions'),
+    getFabricVersions: (mcVersion) => ipcRenderer.invoke('get-fabric-versions', mcVersion),
+    getForgeVersions: (mcVersion) => ipcRenderer.invoke('get-forge-versions', mcVersion),
+    searchModpacks: (params) => ipcRenderer.invoke('search-modpacks', params),
+    getModpackVersions: (params) => ipcRenderer.invoke('get-modpack-versions', params),
+    installModpack: (params) => ipcRenderer.invoke('install-modpack', params),
+    searchMods: (params) => ipcRenderer.invoke('search-mods', params),
+    getModVersions: (params) => ipcRenderer.invoke('get-mod-versions', params),
+    downloadMod: (params) => ipcRenderer.invoke('download-mod', params),
+    getOptifineVersions: (params) => ipcRenderer.invoke('get-optifine-versions', params),
+    installOptifine: (params) => ipcRenderer.invoke('install-optifine', params),
+    installVanillaVersion: (options) => ipcRenderer.invoke('install-vanilla-version', options),
+    getInstalledProfiles: () => ipcRenderer.invoke('get-installed-profiles'),
+    saveLastProfileIndex: (index) => ipcRenderer.invoke('save-last-profile-index', index),
+    deleteProfile: (index) => ipcRenderer.invoke('delete-profile', index),
+    getServers: () => ipcRenderer.invoke('get-servers'),
+    getServerStatus: (ip) => ipcRenderer.invoke('get-server-status', ip),
+
+    getNews: () => ipcRenderer.invoke('get-news'),
+
+    launchGame: (options) => ipcRenderer.invoke('launch-game', options),
+    stopGame: () => ipcRenderer.invoke('stop-game'),
+    onLaunchProgress: (callback) => ipcRenderer.on('launch-progress', (event, data) => callback(data)),
+    onDownloadStatus: (callback) => ipcRenderer.on('download-status', (event, data) => callback(data)),
+    onGameLog: (callback) => ipcRenderer.on('game-log', (event, data) => callback(data)),
+    onGameStarted: (callback) => ipcRenderer.on('game-started', (event, data) => callback(data)),
+    onGameClosed: (callback) => ipcRenderer.on('game-closed', (event, code) => callback(code)),
+
+    getAppPath: () => ipcRenderer.invoke('get-app-path'),
+    openExternal: (url) => ipcRenderer.invoke('open-external', url)
+});

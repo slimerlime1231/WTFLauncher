@@ -1,0 +1,122 @@
+
+.login-overlay {
+    position: absolute;
+    top: var(--title-bar-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--title-bar-height));
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 480px;
+    padding: 40px;
+}
+
+.login-logo {
+    text-align: center;
+}
+
+.login-logo .logo-icon {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 0 30px var(--accent-glow));
+}
+
+.login-logo h1 {
+    font-size: 48px;
+    margin: 0 0 8px 0;
+    background: linear-gradient(135deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.login-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+.large-auth-btn {
+    width: 100%;
+    padding: 18px;
+    font-size: 16px;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border);
+}
+
+.divider span {
+    padding: 0 16px;
+}
+
+.offline-login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.large-input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 12px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border);
+    color: var(--text-primary);
+}
+
+.large-input:focus {
+    border-color: var(--accent);
+    background: var(--bg-hover);
+}
+
+.login-overlay.hidden {
+    display: none;
+}
+
+.login-overlay:not(.hidden) {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}

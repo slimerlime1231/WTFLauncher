@@ -1,0 +1,143 @@
+{
+    "nav": {
+        "home": "Home",
+        "profiles": "Installations",
+        "monitoring": "Monitoring",
+        "accounts": "Accounts",
+        "settings": "Settings",
+        "installedProfiles": "Installed Installations"
+    },
+    "profiles": {
+        "myProfiles": "My Installations",
+        "installNew": "Install New",
+        "delete": "Delete Installation",
+        "confirmDelete": "Are you sure you want to delete this installation?",
+        "edit": "Edit Installation",
+        "enterName": "Installation Name:",
+        "settings": "Installation Settings",
+        "memory": "Memory",
+        "minMemory": "Minimum:",
+        "maxMemory": "Maximum:",
+        "icon": "Icon",
+        "changeIcon": "Change Icon",
+        "openFolder": "Open Folder"
+    },
+    "news": {
+        "launcher": "Launcher News",
+        "minecraft": "Minecraft News",
+        "add": "Add news",
+        "editorTitle": "News Editor",
+        "deleteConfirm": "Delete this news item?"
+    },
+    "login": {
+        "welcome": "Welcome"
+    },
+    "home": {
+        "title": "Play",
+        "selectProfile": "Select Installation",
+        "noProfiles": "No versions found",
+        "deleteProfile": "Delete Installation",
+        "deleteConfirm": "Are you sure you want to delete this installation?",
+        "deleteSuccess": "Installation deleted successfully!",
+        "version": "Version",
+        "releases": "Releases",
+        "snapshots": "Snapshots",
+        "beta": "Beta",
+        "loading": "Loading...",
+        "modloader": "Mod Loader",
+        "selectVersion": "Select version",
+        "play": "PLAY",
+        "close": "CLOSE",
+        "downloading": "Downloading...",
+        "launching": "Launching...",
+        "running": "CLOSE"
+    },
+    "downloads": {
+        "title": "Downloads",
+        "tabs": {
+            "versions": "Versions",
+            "modpacks": "Modpacks",
+            "mods": "Mods",
+            "resourcepacks": "Resource Packs"
+        },
+        "searchPlaceholder": "Search modpacks...",
+        "platform": "Platform",
+        "sort": "Sort by",
+        "sortPopularity": "Popularity",
+        "sortDownloads": "Downloads",
+        "sortLatest": "Latest",
+        "install": "Install",
+        "installed": "Installed!",
+        "selectVersion": "Select Version",
+        "searchModsPlaceholder": "Search mods...",
+        "searchResourcePacksPlaceholder": "Search resource packs...",
+        "downloadMod": "Download",
+        "resourcepacks": "Resource Packs",
+        "downloadSuccessMod": "Mod {name} downloaded successfully!",
+        "downloadSuccessPack": "Resource pack {name} downloaded successfully!",
+        "deleteSuccessMod": "Mod {name} deleted successfully!",
+        "deleteSuccessPack": "Resource pack {name} deleted successfully!"
+    },
+    "accounts": {
+        "title": "Accounts",
+        "microsoft": "Sign in with Microsoft",
+        "offline": "Offline",
+        "usernamePlaceholder": "Username",
+        "noAccount": "No account",
+        "remove": "Remove account",
+        "selected": "Selected",
+        "microsoftType": "Microsoft",
+        "offlineType": "Offline"
+    },
+    "settings": {
+        "title": "Settings",
+        "appearance": "Appearance",
+        "theme": "Theme",
+        "themeDesc": "Choose color scheme",
+        "themeDark": "Dark",
+        "themeLight": "Light",
+        "accentColor": "Accent Color",
+        "accentColorDesc": "Choose interface accent color",
+        "backgroundColor": "Background Color",
+        "backgroundColorDesc": "Choose launcher background color",
+        "backgroundImage": "Background Image",
+        "backgroundImageDesc": "Select an image for background",
+        "language": "Language",
+        "languageDesc": "Interface language",
+        "game": "Game",
+        "gamePath": "Game path",
+        "gamePathDesc": ".minecraft folder",
+        "browse": "Browse",
+        "java": "Java",
+        "memory": "Memory",
+        "memoryDesc": "RAM allocation for the game",
+        "minMemory": "Minimum:",
+        "maxMemory": "Maximum:",
+        "javaPath": "Java path",
+        "javaPathDesc": "Leave empty for auto-search",
+        "selectJava": "Select Java Executable",
+        "javaArgs": "Java arguments",
+        "javaArgsDesc": "Additional JVM parameters",
+        "save": "Save settings",
+        "saved": "Settings saved!"
+    },
+    "errors": {
+        "noAccount": "Select an account to play",
+        "noVersion": "Select a game version",
+        "launchFailed": "Failed to launch game",
+        "loginFailed": "Login failed",
+        "invalidUsername": "Enter valid name (3-16 chars, letters, numbers, _)"
+    },
+    "monitoring": {
+        "title": "Monitoring",
+        "play": "Play",
+        "online": "Online",
+        "offline": "Offline",
+        "noServers": "No servers added"
+    },
+    "modal": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "ok": "OK"
+    }
+}

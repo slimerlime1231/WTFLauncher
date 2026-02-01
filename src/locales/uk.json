@@ -1,0 +1,113 @@
+{
+    "nav": {
+        "home": "Головна",
+        "profiles": "Збірки",
+        "monitoring": "Моніторинг",
+        "accounts": "Акаунти",
+        "settings": "Налаштування",
+        "installedProfiles": "Встановлені збірки"
+    },
+    "profiles": {
+        "myProfiles": "Мої збірки",
+        "installNew": "Встановити"
+    },
+    "monitoring": {
+        "addServer": "Додати сервер",
+        "noServers": "Немає доданих серверів",
+        "enterName": "Назва сервера:",
+        "enterIP": "IP сервера:",
+        "deleteConfirm": "Ви впевнені, що бажаєте видалити цей сервер?"
+    },
+    "news": {
+        "launcher": "Новини Лаунчера",
+        "minecraft": "Новини Minecraft"
+    },
+    "login": {
+        "welcome": "Ласкаво просимо"
+    },
+    "home": {
+        "title": "Грати",
+        "selectProfile": "Виберіть збірку",
+        "noProfiles": "Версії не знайдені",
+        "deleteProfile": "Видалити збірку",
+        "deleteConfirm": "Ви впевнені, що хочете видалити збірку?",
+        "version": "Версія",
+        "releases": "Релізи",
+        "snapshots": "Снапшоти",
+        "beta": "Бета",
+        "loading": "Завантаження...",
+        "modloader": "Завантажувач модів",
+        "selectVersion": "Виберіть версію",
+        "play": "ГРАТИ",
+        "deleteSuccess": "Збірку успішно видалено!",
+        "close": "ЗАКРИТИ",
+        "downloading": "Завантаження...",
+        "launching": "Запуск...",
+        "running": "Гра запущена"
+    },
+    "downloads": {
+        "title": "Завантаження",
+        "tabs": {
+            "versions": "Версії",
+            "modpacks": "Модпаки",
+            "mods": "Моди"
+        },
+        "searchPlaceholder": "Пошук модпаків...",
+        "platform": "Платформа",
+        "sort": "Сортувати за",
+        "sortPopularity": "Популярністю",
+        "sortDownloads": "Завантаженнями",
+        "sortLatest": "Новизною",
+        "install": "Встановити",
+        "installed": "Встановлено!",
+        "selectVersion": "Виберіть версію",
+        "searchModsPlaceholder": "Пошук модів...",
+        "downloadMod": "Завантажити"
+    },
+    "accounts": {
+        "title": "Акаунти",
+        "microsoft": "Увійти через Microsoft",
+        "offline": "Офлайн",
+        "usernamePlaceholder": "Ім'я користувача",
+        "noAccount": "Немає акаунта",
+        "remove": "Видалити акаунт",
+        "selected": "Обрано",
+        "microsoftType": "Microsoft",
+        "offlineType": "Офлайн"
+    },
+    "settings": {
+        "title": "Налаштування",
+        "appearance": "Зовнішній вигляд",
+        "theme": "Тема",
+        "themeDesc": "Виберіть колірну схему",
+        "themeDark": "Темна",
+        "themeLight": "Світла",
+        "accentColor": "Колір акценту",
+        "accentColorDesc": "Виберіть колір елементів інтерфейсу",
+        "language": "Мова",
+        "languageDesc": "Мова інтерфейсу",
+        "game": "Гра",
+        "gamePath": "Шлях до гри",
+        "gamePathDesc": "Папка .minecraft",
+        "browse": "Огляд",
+        "java": "Java",
+        "memory": "Пам'ять",
+        "memoryDesc": "Виділення RAM для гри",
+        "minMemory": "Мінімум:",
+        "maxMemory": "Максимум:",
+        "javaPath": "Шлях до Java",
+        "javaPathDesc": "Залиште порожнім для автоматичного пошуку",
+        "selectJava": "Виберіть виконуваний файл Java",
+        "javaArgs": "Аргументи Java",
+        "javaArgsDesc": "Додаткові параметри JVM",
+        "save": "Зберегти налаштування",
+        "saved": "Налаштування збережено!"
+    },
+    "errors": {
+        "noAccount": "Виберіть акаунт для гри",
+        "noVersion": "Виберіть версію гри",
+        "launchFailed": "Не вдалося запустити гру",
+        "loginFailed": "Помилка входу",
+        "invalidUsername": "Введіть правильне ім'я (3-16 символів, літери, цифри, _)"
+    }
+}

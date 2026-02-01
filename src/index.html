@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://mc-heads.net https://crafatar.com https://cdn.modrinth.com https://media.forgecdn.net https://www.minecraft.net https://api.mcstatus.io https://*.minecraft.net data:;">
+    <title>WTFLauncher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/additional.css">
+    <link rel="stylesheet" href="css/fixes.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/layout_fix.css">
+    <link rel="stylesheet" href="css/redesign.css">
+    <link rel="stylesheet" href="css/news.css">
+</head>
+
+<body>
+    <div id="app">
+
+        <div id="login-overlay" class="login-overlay">
+            <div class="login-content">
+                <div class="login-logo">
+                    <h1>WTFLauncher</h1>
+                    <p data-i18n="login.welcome">Добро пожаловать</p>
+                </div>
+
+                <div class="login-methods">
+                    <button class="auth-btn microsoft-btn large-auth-btn" id="btn-login-microsoft">
+                        <span class="auth-icon">🔷</span>
+                        <span data-i18n="accounts.microsoft">Войти через Microsoft</span>
+                    </button>
+
+                    <div class="divider">
+                        <span>ИЛИ</span>
+                    </div>
+
+                    <div class="offline-login-container">
+                        <input type="text" class="offline-input large-input" id="login-offline-username"
+                            placeholder="Имя игрока" data-i18n-placeholder="accounts.usernamePlaceholder" maxlength="16"
+                            pattern="[a-zA-Z0-9_]+">
+                        <button class="auth-btn offline-btn large-auth-btn" id="btn-login-offline">
+                            <span class="auth-icon">👤</span>
+                            <span data-i18n="accounts.offline">Войти Оффлайн</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="title-bar">
+            <div class="title-bar-left">
+                <div class="logo">
+                    <img src="../assets/applogo2.png" class="logo-icon" alt="WTF Logo">
+                    <span class="logo-text">WTFLauncher</span>
+                </div>
+            </div>
+            <div class="title-bar-right">
+                <button class="title-btn discord-btn" id="btn-discord" title="Join Discord">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.078.078 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                    </svg>
+                </button>
+                <button class="title-btn title-settings-btn" id="btn-title-settings" title="Settings">⚙️</button>
+                <button class="title-btn" id="btn-minimize"></button>
+                <button class="title-btn" id="btn-maximize"></button>
+                <button class="title-btn btn-close" id="btn-close"></button>
+            </div>
+        </div>
+
+        <div class="main-container">
+
+            <nav class="sidebar">
+                <div class="nav-items">
+                    <button class="nav-item active" data-page="home">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text" data-i18n="nav.home">Главная</span>
+                    </button>
+                    <button class="nav-item" data-page="profiles">
+                        <span class="nav-icon">📂</span>
+                        <span class="nav-text" data-i18n="nav.profiles">Профили</span>
+                    </button>
+                    <button class="nav-item" data-page="monitoring">
+                        <span class="nav-icon">📡</span>
+                        <span class="nav-text" data-i18n="nav.monitoring">Мониторинг</span>
+                    </button>
+
+                    <div class="sidebar-profiles">
+                        <h3 class="sidebar-title" data-i18n="nav.installedProfiles">Установленные</h3>
+                        <div class="sidebar-profiles-list" id="sidebar-profiles-list">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-spacer"></div>
+
+                <div class="current-account" id="current-account">
+                    <img class="account-avatar" src="https://mc-heads.net/avatar/MHF_Steve/48" alt="Avatar">
+                    <div class="account-info">
+                        <span class="account-name" data-i18n="accounts.noAccount">Нет аккаунта</span>
+                        <span class="account-type"></span>
+                    </div>
+                    <button class="sidebar-settings-btn" id="btn-sidebar-settings">⚙️</button>
+                </div>
+            </nav>
+
+            <main class="content">
+
+                <div class="page active" id="page-home">
+
+                    <div class="news-section">
+                        <div class="news-tabs">
+                            <button class="news-tab active" data-news="launcher" data-i18n="news.launcher">Новости
+                                Лаунчера</button>
+                        </div>
+                        <div class="news-content" id="news-content">
+
+                        </div>
+                    </div>
+
+                    <div class="bottom-controls">
+                        <div class="launch-area">
+                            <button class="launch-btn" id="launch-btn">
+                                <span class="launch-text" data-i18n="home.play">ИГРАТЬ</span>
+                            </button>
+                            <div class="profile-selector-container">
+                                <select id="profile-select" class="bottom-profile-select">
+                                    <option value="" data-i18n="home.selectProfile">Выберите профиль</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page" id="page-profiles">
+                    <div class="page-header">
+                        <h1 data-i18n="nav.profiles">Профили</h1>
+                    </div>
+
+                    <div class="main-tabs-container">
+                        <div class="tab-btn active" data-target="section-my-profiles" data-i18n="profiles.myProfiles">
+                            Мои профили</div>
+                        <div class="tab-btn" data-target="section-install-new" data-i18n="profiles.installNew">
+                            Установить</div>
+                    </div>
+
+                    <div class="section-content active" id="section-my-profiles">
+                        <div class="profiles-management-grid" id="profiles-management-grid">
+
+                        </div>
+                    </div>
+
+                    <div class="section-content" id="section-install-new">
+                        <div class="tabs-container sub-tabs">
+                            <div class="tab-btn active" data-target="tab-versions" data-i18n="downloads.tabs.versions">
+                                Версии</div>
+                            <div class="tab-btn" data-target="tab-modpacks" data-i18n="downloads.tabs.modpacks">Модпаки
+                            </div>
+                            <div class="tab-btn" data-target="tab-mods" data-i18n="downloads.tabs.mods">Моды</div>
+                            <div class="tab-btn" data-target="tab-resourcepacks"
+                                data-i18n="downloads.tabs.resourcepacks">Ресурспаки</div>
+
+                        </div>
+
+                        <div class="downloads-content tab-content active" id="tab-versions">
+                            <div class="version-card">
+                                <div class="card-header">
+                                    <span class="card-icon">📦</span>
+                                    <h3 data-i18n="home.version">Версия Minecraft</h3>
+                                </div>
+                                <div class="version-filters">
+                                    <button class="filter-btn active" data-filter="release"
+                                        data-i18n="home.releases">Релизы</button>
+                                    <button class="filter-btn" data-filter="snapshot"
+                                        data-i18n="home.snapshots">Снапшоты</button>
+                                    <button class="filter-btn" data-filter="old_beta"
+                                        data-i18n="home.beta">Бета</button>
+                                </div>
+                                <select class="version-select" id="version-select">
+                                    <option value="" data-i18n="home.loading">Загрузка...</option>
+                                </select>
+                            </div>
+
+                            <div class="modloader-card">
+                                <div class="card-header">
+                                    <span class="card-icon">🔧</span>
+                                    <h3 data-i18n="home.modloader">Модлоадер</h3>
+                                </div>
+                                <div class="modloader-options">
+                                    <button class="modloader-btn active" data-loader="vanilla">
+                                        <span class="loader-name">Vanilla</span>
+                                    </button>
+                                    <button class="modloader-btn" data-loader="fabric">
+                                        <span class="loader-name">Fabric</span>
+                                    </button>
+                                    <button class="modloader-btn" data-loader="forge">
+                                        <span class="loader-name">Forge</span>
+                                    </button>
+                                </div>
+                                <select class="modloader-version-select hidden" id="modloader-version-select">
+                                    <option value="" data-i18n="home.selectVersion">Выберите версию</option>
+                                </select>
+                            </div>
+
+                            <button class="action-btn" id="btn-create-profile" data-i18n="downloads.install">
+                                Установить / Создать профиль
+                            </button>
+                        </div>
+
+                        <div class="downloads-content tab-content" id="tab-modpacks">
+                            <div class="modpacks-browser">
+                                <div class="modpacks-header">
+                                    <div class="search-wrapper">
+                                        <span class="search-icon">🔍</span>
+                                        <input type="text" id="modpack-search-input"
+                                            data-i18n-placeholder="downloads.searchPlaceholder"
+                                            placeholder="Поиск модпаков...">
+                                    </div>
+                                    <div class="modpacks-controls">
+                                        <div class="platform-selector">
+                                            <button class="platform-btn active"
+                                                data-platform="modrinth">Modrinth</button>
+                                            <button class="platform-btn" data-platform="curseforge">CurseForge</button>
+                                        </div>
+                                        <select id="modpack-sort-select" class="sort-select">
+                                            <option value="relevance" data-i18n="downloads.sortPopularity">Популярность
+                                            </option>
+                                            <option value="downloads" data-i18n="downloads.sortDownloads">Загрузки
+                                            </option>
+                                            <option value="newest" data-i18n="downloads.sortLatest">Новинки</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modpack-grid" id="modpack-grid">
+                                    <div class="loading-placeholder">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="downloads-content tab-content" id="tab-mods">
+                            <div class="modpacks-browser">
+                                <div class="modpacks-header">
+                                    <div class="search-wrapper">
+                                        <span class="search-icon">🔍</span>
+                                        <input type="text" id="mod-search-input"
+                                            data-i18n-placeholder="downloads.searchModsPlaceholder"
+                                            placeholder="Поиск модов...">
+                                    </div>
+                                    <div class="modpacks-controls">
+                                        <div class="platform-selector">
+                                            <button class="platform-btn active"
+                                                data-platform="modrinth">Modrinth</button>
+                                            <button class="platform-btn" data-platform="curseforge">CurseForge</button>
+                                        </div>
+                                        <select id="mod-sort-select" class="sort-select">
+                                            <option value="relevance" data-i18n="downloads.sortPopularity">Популярность
+                                            </option>
+                                            <option value="downloads" data-i18n="downloads.sortDownloads">Загрузки
+                                            </option>
+                                            <option value="newest" data-i18n="downloads.sortLatest">Новинки</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modpack-grid" id="mod-grid">
+                                    <div class="loading-placeholder">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="downloads-content tab-content" id="tab-resourcepacks">
+                            <div class="modpacks-browser">
+                                <div class="modpacks-header">
+                                    <div class="search-wrapper">
+                                        <span class="search-icon">🔍</span>
+                                        <input type="text" id="resourcepacks-search-input"
+                                            placeholder="Поиск ресурспаков..."
+                                            data-i18n-placeholder="downloads.searchResourcePacksPlaceholder">
+                                    </div>
+
+                                    <div class="modpacks-controls">
+                                        <div class="platform-selector" id="resourcepack-platform-selector">
+                                            <button class="platform-btn active"
+                                                data-platform="modrinth">Modrinth</button>
+                                            <button class="platform-btn" data-platform="curseforge">CurseForge</button>
+                                        </div>
+
+                                        <div class="sort-selector">
+                                            <select id="resourcepacks-sort-select" class="sort-select">
+                                                <option value="relevance" data-i18n="downloads.sortPopularity">
+                                                    Популярность</option>
+                                                <option value="downloads" data-i18n="downloads.sortDownloads">Загрузки
+                                                </option>
+                                                <option value="newest" data-i18n="downloads.sortLatest">Новинки</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modpack-grid" id="resourcepacks-grid">
+                                    <div class="loading-placeholder">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="page" id="page-monitoring">
+                    <div class="page-header">
+                        <h1 data-i18n="nav.monitoring">Мониторинг</h1>
+                    </div>
+                    <div class="monitoring-grid" id="monitoring-grid">
+
+                        <div class="no-servers-msg" data-i18n="monitoring.noServers">Нет добавленных серверов</div>
+                    </div>
+                </div>
+
+                <div class="page" id="page-accounts">
+                    <div class="page-header">
+                        <h1 data-i18n="accounts.title">Аккаунты</h1>
+                    </div>
+
+                    <div class="accounts-content">
+
+                        <div class="add-account-section">
+                            <button class="auth-btn microsoft-btn" id="btn-microsoft">
+                                <span class="auth-icon">🔷</span>
+                                <span data-i18n="accounts.microsoft">Войти через Microsoft</span>
+                            </button>
+
+                            <div class="offline-login">
+                                <input type="text" class="offline-input" id="offline-username" placeholder="Имя игрока"
+                                    data-i18n-placeholder="accounts.usernamePlaceholder" maxlength="16"
+                                    pattern="[a-zA-Z0-9_]+">
+                                <button class="auth-btn offline-btn" id="btn-offline">
+                                    <span class="auth-icon">👤</span>
+                                    <span data-i18n="accounts.offline">Оффлайн</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="accounts-list" id="accounts-list">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page" id="page-settings">
+                    <div class="page-header">
+                        <h1 data-i18n="settings.title">Настройки</h1>
+                    </div>
+
+                    <div class="settings-content">
+
+                        <div class="settings-group">
+                            <h3 class="settings-group-title" data-i18n="settings.appearance">Внешний вид</h3>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.theme">Тема</span>
+                                    <span class="setting-desc" data-i18n="settings.themeDesc">Выберите цветовую
+                                        схему</span>
+                                </div>
+                                <select class="setting-select" id="setting-theme">
+                                    <option value="dark" data-i18n="settings.themeDark">Тёмная</option>
+                                    <option value="light" data-i18n="settings.themeLight">Светлая</option>
+                                </select>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.accentColor">Цвет акцента</span>
+                                    <span class="setting-desc" data-i18n="settings.accentColorDesc">Выберите цвет
+                                        интерфейса</span>
+                                </div>
+                                <div class="accent-color-controls">
+                                    <input type="color" class="accent-color-picker" id="setting-accent-color"
+                                        value="#6c5ce7">
+                                    <div class="accent-presets">
+                                        <button class="accent-preset" style="background: #6c5ce7;"
+                                            data-color="#6c5ce7"></button>
+                                        <button class="accent-preset" style="background: #00cec9;"
+                                            data-color="#00cec9"></button>
+                                        <button class="accent-preset" style="background: #00b894;"
+                                            data-color="#00b894"></button>
+                                        <button class="accent-preset" style="background: #fdcb6e;"
+                                            data-color="#fdcb6e"></button>
+                                        <button class="accent-preset" style="background: #ff7675;"
+                                            data-color="#ff7675"></button>
+                                        <button class="accent-preset" style="background: #e17055;"
+                                            data-color="#e17055"></button>
+                                        <button class="accent-preset" style="background: #fd79a8;"
+                                            data-color="#fd79a8"></button>
+                                        <button class="accent-preset" style="background: #a29bfe;"
+                                            data-color="#a29bfe"></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.backgroundColor">Цвет фона</span>
+                                    <span class="setting-desc" data-i18n="settings.backgroundColorDesc">Однотонный цвет
+                                        фона</span>
+                                </div>
+                                <input type="color" class="accent-color-picker" id="setting-bg-color" value="#0f0f1a">
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.backgroundImage">Фоновое
+                                        изображение</span>
+                                    <span class="setting-desc" data-i18n="settings.backgroundImageDesc">Загрузите свою
+                                        картинку</span>
+                                </div>
+                                <div class="path-selector">
+                                    <input type="text" class="setting-input path-input" id="setting-bg-image"
+                                        placeholder="Не выбрано" readonly>
+                                    <button class="browse-btn" id="btn-browse-bg">Обзор</button>
+                                    <button class="browse-btn" id="btn-reset-bg">Сбросить</button>
+                                </div>
+                            </div>
+
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.language">Язык</span>
+                                    <span class="setting-desc" data-i18n="settings.languageDesc">Язык интерфейса</span>
+                                </div>
+                                <select class="setting-select" id="setting-language">
+                                    <option value="ru">Русский</option>
+                                    <option value="en">English</option>
+                                    <option value="uk">Українська</option>
+                                    <option value="es">Español</option>
+                                    <option value="zh">简体中文</option>
+                                    <option value="it">Italiano</option>
+                                    <option value="de">Deutsch</option>
+                                    <option value="fr">Français</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3 class="settings-group-title" data-i18n="settings.game">Игра</h3>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.gamePath">Путь к игре</span>
+                                    <span class="setting-desc" data-i18n="settings.gamePathDesc">Папка .minecraft</span>
+                                </div>
+                                <div class="path-selector">
+                                    <input type="text" class="setting-input path-input" id="setting-game-path" readonly>
+                                    <button class="browse-btn" id="btn-browse-path"
+                                        data-i18n="settings.browse">Обзор</button>
+                                    <button class="open-btn" id="btn-open-path" title="Открыть папку">📁</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3 class="settings-group-title" data-i18n="settings.java">Java</h3>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.memory">Оперативная память</span>
+                                    <span class="setting-desc" data-i18n="settings.memoryDesc">Выделение RAM для
+                                        игры</span>
+                                </div>
+                                <div class="memory-sliders">
+                                    <div class="memory-slider-group">
+                                        <label data-i18n="settings.minMemory">Минимум:</label>
+                                        <input type="range" class="memory-slider" id="setting-min-memory" min="1024"
+                                            max="16384" step="512" value="2048">
+                                        <span class="memory-value" id="min-memory-value">2048 MB</span>
+                                    </div>
+                                    <div class="memory-slider-group">
+                                        <label data-i18n="settings.maxMemory">Максимум:</label>
+                                        <input type="range" class="memory-slider" id="setting-max-memory" min="1024"
+                                            max="16384" step="512" value="4096">
+                                        <span class="memory-value" id="max-memory-value">4096 MB</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.javaPath">Путь к Java</span>
+                                    <span class="setting-desc" data-i18n="settings.javaPathDesc">Оставьте пустым для
+                                        автопоиска</span>
+                                </div>
+                                <div class="path-selector">
+                                    <input type="text" class="setting-input path-input" id="setting-java-path"
+                                        placeholder="Автоматически">
+                                    <button class="browse-btn" id="btn-browse-java"
+                                        data-i18n="settings.browse">Обзор</button>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label" data-i18n="settings.javaArgs">Java аргументы</span>
+                                    <span class="setting-desc" data-i18n="settings.javaArgsDesc">Дополнительные
+                                        параметры JVM</span>
+                                </div>
+                                <input type="text" class="setting-input" id="setting-java-args"
+                                    placeholder="-XX:+UseG1GC">
+                            </div>
+
+                        </div>
+
+                        <button class="save-btn" id="btn-save-settings">
+                            <span data-i18n="settings.save">Сохранить настройки</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div class="modal hidden" id="modpack-version-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 data-i18n="downloads.selectVersion">Выберите версию</h2>
+                    <button class="close-modal" id="close-version-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="version-list" id="modpack-version-list">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal hidden" id="mod-version-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 data-i18n="downloads.selectVersion">Выберите версию</h2>
+                    <button class="close-modal" id="close-mod-version-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="version-list" id="mod-version-list">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="custom-modal" class="modal hidden">
+            <div class="modal-content small-modal">
+                <div class="modal-header">
+                    <h2 id="modal-title">Notification</h2>
+                    <span class="close-modal" id="close-custom-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-message"></p>
+                    <input type="text" id="modal-input" class="modal-input hidden">
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-btn-cancel" class="btn-secondary hidden">Cancel</button>
+                    <button id="modal-btn-confirm" class="btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="profile-settings-modal" class="modal hidden">
+            <div class="modal-content" style="max-width: 500px;">
+                <div class="modal-header">
+                    <h2 id="profile-settings-title" data-i18n="profiles.settings">Настройки профиля</h2>
+                    <span class="close-modal" id="close-profile-settings">&times;</span>
+                </div>
+                <div class="modal-body">
+
+                    <div class="setting-item">
+                        <label for="profile-name-input" data-i18n="profiles.enterName">Название сборки</label>
+                        <input type="text" id="profile-name-input" class="modal-input">
+                    </div>
+
+                    <div class="setting-item">
+                        <label data-i18n="profiles.memory">Память</label>
+                        <div class="memory-sliders">
+                            <div class="slider-group">
+                                <span data-i18n="profiles.minMemory">Минимум:</span>
+                                <input type="range" id="profile-min-memory" min="512" max="16384" step="512"
+                                    value="2048">
+                                <span id="profile-min-memory-value">2048 MB</span>
+                            </div>
+                            <div class="slider-group">
+                                <span data-i18n="profiles.maxMemory">Максимум:</span>
+                                <input type="range" id="profile-max-memory" min="1024" max="32768" step="512"
+                                    value="4096">
+                                <span id="profile-max-memory-value">4096 MB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <label data-i18n="profiles.icon">Иконка</label>
+                        <div class="icon-row">
+                            <img id="profile-icon-preview" src="../assets/logo1.png" class="profile-icon-preview">
+                            <button id="btn-change-icon" class="btn-secondary" data-i18n="profiles.changeIcon">Изменить
+                                иконку</button>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <button id="btn-open-profile-folder" class="btn-secondary full-width">
+                            <span>📁</span> <span data-i18n="profiles.openFolder">Открыть папку</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="profile-settings-cancel" class="btn-secondary" data-i18n="modal.cancel">Отмена</button>
+                    <button id="profile-settings-save" class="btn-primary" data-i18n="modal.save">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Server Modal -->
+        <div class="modal hidden" id="server-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 data-i18n="monitoring.addServerTitle">Добавить сервер</h2>
+                    <button class="close-modal" id="close-server-modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-item">
+                        <label data-i18n="monitoring.serverName">Название сервера</label>
+                        <input type="text" class="setting-input" id="server-name-input" placeholder="Мой сервер">
+                    </div>
+                    <div class="setting-item">
+                        <label data-i18n="monitoring.serverIP">IP адрес</label>
+                        <input type="text" class="setting-input" id="server-ip-input" placeholder="play.example.com">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="server-modal-cancel" class="btn-secondary" data-i18n="modal.cancel">Отмена</button>
+                    <button id="server-modal-save" class="btn-primary" data-i18n="modal.save">Добавить</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container hidden" id="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-info">
+                <span class="progress-task" id="progress-task"></span>
+                <span class="progress-percent" id="progress-percent">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="js/i18n.js"></script>
+
+    <img id="easter-egg-image" src="../assets/goated.png" class="easter-egg-image" alt="Easter Egg">
+
+    <script src="js/renderer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+{
+    "nav": {
+        "home": "Accueil",
+        "profiles": "Installations",
+        "monitoring": "Monitoring",
+        "accounts": "Comptes",
+        "settings": "Paramètres",
+        "installedProfiles": "Installations installées"
+    },
+    "profiles": {
+        "myProfiles": "Mes installations",
+        "installNew": "Installer"
+    },
+    "monitoring": {
+        "addServer": "Ajouter un serveur",
+        "noServers": "Aucun serveur ajouté",
+        "enterName": "Nom du serveur :",
+        "enterIP": "IP du serveur :",
+        "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce serveur ?"
+    },
+    "news": {
+        "launcher": "Actualités du Launcher",
+        "minecraft": "Actualités Minecraft"
+    },
+    "login": {
+        "welcome": "Bienvenue"
+    },
+    "home": {
+        "title": "Jouer",
+        "selectProfile": "Sélectionner une installation",
+        "noProfiles": "Aucune version trouvée",
+        "deleteProfile": "Supprimer l'installation",
+        "deleteConfirm": "Voulez-vous vraiment supprimer cette installation ?",
+        "version": "Version",
+        "releases": "Versions",
+        "snapshots": "Snapshots",
+        "beta": "Bêta",
+        "loading": "Chargement...",
+        "modloader": "Chargeur de mods",
+        "selectVersion": "Sélectionner une version",
+        "play": "JOUER",
+        "deleteSuccess": "Installation supprimée avec succès !",
+        "close": "FERMER",
+        "downloading": "Téléchargement...",
+        "launching": "Lancement...",
+        "running": "Jeu en cours"
+    },
+    "downloads": {
+        "title": "Téléchargements",
+        "tabs": {
+            "versions": "Versions",
+            "modpacks": "Modpacks",
+            "mods": "Mods"
+        },
+        "searchPlaceholder": "Rechercher des modpacks...",
+        "platform": "Plateforme",
+        "sort": "Trier par",
+        "sortPopularity": "Popularité",
+        "sortDownloads": "Téléchargements",
+        "sortLatest": "Récents",
+        "install": "Installer",
+        "installed": "Installé !",
+        "selectVersion": "Sélectionner une version",
+        "searchModsPlaceholder": "Rechercher des mods...",
+        "downloadMod": "Télécharger"
+    },
+    "accounts": {
+        "title": "Comptes",
+        "microsoft": "Se connecter avec Microsoft",
+        "offline": "Hors ligne",
+        "usernamePlaceholder": "Nom d'utilisateur",
+        "noAccount": "Aucun compte",
+        "remove": "Supprimer le compte",
+        "selected": "Sélectionné",
+        "microsoftType": "Microsoft",
+        "offlineType": "Hors ligne"
+    },
+    "settings": {
+        "title": "Paramètres",
+        "appearance": "Apparence",
+        "theme": "Thème",
+        "themeDesc": "Choisir le schéma de couleurs",
+        "themeDark": "Sombre",
+        "themeLight": "Clair",
+        "accentColor": "Couleur d'accentuation",
+        "accentColorDesc": "Choisissez la couleur d'accentuation de l'interface",
+        "language": "Langue",
+        "languageDesc": "Langue de l'interface",
+        "game": "Jeu",
+        "gamePath": "Chemin du jeu",
+        "gamePathDesc": "Dossier .minecraft",
+        "browse": "Parcourir",
+        "java": "Java",
+        "memory": "Mémoire",
+        "memoryDesc": "Allocation de RAM pour le jeu",
+        "minMemory": "Minimum :",
+        "maxMemory": "Maximum :",
+        "javaPath": "Chemin Java",
+        "javaPathDesc": "Laisser vide pour la recherche automatique",
+        "selectJava": "Sélectionner l'exécutable Java",
+        "javaArgs": "Arguments Java",
+        "javaArgsDesc": "Paramètres JVM supplémentaires",
+        "save": "Enregistrer les paramètres",
+        "saved": "Paramètres enregistrés !"
+    },
+    "errors": {
+        "noAccount": "Sélectionnez un compte pour jouer",
+        "noVersion": "Sélectionnez une version du jeu",
+        "launchFailed": "Échec du lancement du jeu",
+        "loginFailed": "Échec de la connexion",
+        "invalidUsername": "Entrez un nom valide (3-16 caractères, lettres, chiffres, _)"
+    }
+}

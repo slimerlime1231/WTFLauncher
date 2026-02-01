@@ -1,0 +1,142 @@
+{
+    "nav": {
+        "home": "Главная",
+        "profiles": "Сборки",
+        "monitoring": "Мониторинг",
+        "accounts": "Аккаунты",
+        "settings": "Настройки",
+        "installedProfiles": "Установленные"
+    },
+    "profiles": {
+        "myProfiles": "Мои сборки",
+        "installNew": "Установить",
+        "delete": "Удалить сборку",
+        "confirmDelete": "Вы уверены, что хотите удалить эту сборку?",
+        "edit": "Редактировать сборку",
+        "enterName": "Название сборки:",
+        "settings": "Настройки сборки",
+        "memory": "Память",
+        "minMemory": "Минимум:",
+        "maxMemory": "Максимум:",
+        "icon": "Иконка",
+        "changeIcon": "Изменить иконку",
+        "openFolder": "Открыть папку"
+    },
+    "news": {
+        "launcher": "Новости Лаунчера",
+        "minecraft": "Новости Minecraft",
+        "add": "Добавить новость",
+        "editorTitle": "Редактор новостей",
+        "deleteConfirm": "Удалить эту новость?"
+    },
+    "login": {
+        "welcome": "Добро пожаловать"
+    },
+    "home": {
+        "title": "Играть",
+        "version": "Версия",
+        "releases": "Релизы",
+        "snapshots": "Снапшоты",
+        "beta": "Бета",
+        "loading": "Загрузка...",
+        "modloader": "Модлоадер",
+        "selectVersion": "Выберите версию",
+        "selectProfile": "Выберите сборку",
+        "noProfiles": "Версии не найдены",
+        "deleteProfile": "Удалить сборку",
+        "deleteConfirm": "Вы уверены, что хотите удалить сборку?",
+        "deleteSuccess": "Сборка успешно удалена!",
+        "play": "ИГРАТЬ",
+        "downloading": "Загрузка...",
+        "launching": "Запуск...",
+        "running": "Игра запущена"
+    },
+    "downloads": {
+        "title": "Загрузки",
+        "tabs": {
+            "versions": "Версии",
+            "modpacks": "Модпаки",
+            "mods": "Моды",
+            "resourcepacks": "Ресурспаки"
+        },
+        "searchPlaceholder": "Поиск модпаков...",
+        "platform": "Платформа",
+        "sort": "Сортировка",
+        "sortPopularity": "Популярность",
+        "sortDownloads": "Загрузки",
+        "sortLatest": "Новинки",
+        "install": "Установить",
+        "installed": "Установлено!",
+        "selectVersion": "Выберите версию",
+        "searchModsPlaceholder": "Поиск модов...",
+        "searchResourcePacksPlaceholder": "Поиск ресурспаков...",
+        "downloadMod": "Скачать",
+        "resourcepacks": "Ресурспаки",
+        "downloadSuccessMod": "Мод {name} успешно загружен!",
+        "downloadSuccessPack": "Ресурспак {name} успешно загружен!",
+        "deleteSuccessMod": "Мод {name} успешно удален!",
+        "deleteSuccessPack": "Ресурспак {name} успешно удален!"
+    },
+    "accounts": {
+        "title": "Аккаунты",
+        "microsoft": "Войти через Microsoft",
+        "offline": "Офлайн",
+        "usernamePlaceholder": "Имя игрока",
+        "noAccount": "Нет аккаунта",
+        "remove": "Удалить аккаунт",
+        "selected": "Выбран",
+        "microsoftType": "Microsoft",
+        "offlineType": "Оффлайн"
+    },
+    "settings": {
+        "title": "Настройки",
+        "appearance": "Внешний вид",
+        "theme": "Тема",
+        "themeDesc": "Выберите цветовую схему",
+        "themeDark": "Тёмная",
+        "themeLight": "Светлая",
+        "accentColor": "Цвет акцента",
+        "accentColorDesc": "Выберите цвет элементов интерфейса",
+        "backgroundColor": "Цвет фона",
+        "backgroundColorDesc": "Выберите цвет фона лаунчера",
+        "backgroundImage": "Фоновая картинка",
+        "backgroundImageDesc": "Выберите изображение для фона",
+        "language": "Язык",
+        "languageDesc": "Язык интерфейса",
+        "game": "Игра",
+        "gamePath": "Путь к игре",
+        "gamePathDesc": "Папка .minecraft",
+        "browse": "Обзор",
+        "java": "Java",
+        "memory": "Оперативная память",
+        "memoryDesc": "Выделение RAM для игры",
+        "minMemory": "Минимум:",
+        "maxMemory": "Максимум:",
+        "javaPath": "Путь к Java",
+        "javaPathDesc": "Оставьте пустым для автоматического поиска",
+        "selectJava": "Выберите исполняемый файл Java",
+        "javaArgs": "Java аргументы",
+        "javaArgsDesc": "Дополнительные параметры JVM",
+        "save": "Сохранить настройки",
+        "saved": "Настройки сохранены!"
+    },
+    "errors": {
+        "noAccount": "Выберите аккаунт для игры",
+        "noVersion": "Выберите версию игры",
+        "launchFailed": "Ошибка запуска игры",
+        "loginFailed": "Ошибка входа",
+        "invalidUsername": "Введите корректное имя (3-16 символов, буквы, цифры, _)"
+    },
+    "monitoring": {
+        "title": "Мониторинг",
+        "play": "Играть",
+        "online": "Онлайн",
+        "offline": "Оффлайн",
+        "noServers": "Нет добавленных серверов"
+    },
+    "modal": {
+        "save": "Сохранить",
+        "cancel": "Отмена",
+        "ok": "OK"
+    }
+}

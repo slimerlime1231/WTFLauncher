@@ -1,0 +1,142 @@
+{
+    "nav": {
+        "home": "首页",
+        "profiles": "安装",
+        "monitoring": "服务器监控",
+        "accounts": "账户",
+        "settings": "设置",
+        "installedProfiles": "已安装版本"
+    },
+    "profiles": {
+        "myProfiles": "我的安装",
+        "installNew": "添加新安装",
+        "delete": "删除安装",
+        "confirmDelete": "您确定要删除此安装吗？",
+        "edit": "编辑安装",
+        "enterName": "安装名称：",
+        "settings": "安装设置",
+        "memory": "内存",
+        "minMemory": "最小：",
+        "maxMemory": "最大：",
+        "icon": "图标",
+        "changeIcon": "更改图标",
+        "openFolder": "打开文件夹"
+    },
+    "monitoring": {
+        "addServer": "添加服务器",
+        "noServers": "尚未添加服务器",
+        "enterName": "服务器名称：",
+        "enterIP": "服务器 IP：",
+        "deleteConfirm": "您确定要删除此服务器吗？",
+        "play": "开始游戏",
+        "online": "在线",
+        "offline": "离线",
+        "players": "玩家",
+        "settings": "设置",
+        "delete": "删除",
+        "changeIconQuestion": "更改服务器图标？"
+    },
+    "news": {
+        "launcher": "启动器新闻",
+        "minecraft": "我的世界新闻",
+        "add": "添加新闻",
+        "editorTitle": "新闻编辑器",
+        "deleteConfirm": "删除此新闻项目？"
+    },
+    "login": {
+        "welcome": "欢迎"
+    },
+    "home": {
+        "title": "开始游戏",
+        "version": "版本",
+        "releases": "发布版",
+        "snapshots": "快照",
+        "beta": "测试版",
+        "loading": "加载中...",
+        "modloader": "模组加载器",
+        "selectVersion": "选择版本",
+        "selectProfile": "选择安装",
+        "noProfiles": "未找到版本",
+        "deleteProfile": "删除安装",
+        "deleteConfirm": "您确定要删除此安装吗？",
+        "deleteSuccess": "安装已成功删除！",
+        "play": "开始游戏",
+        "close": "关闭",
+        "downloading": "下载中...",
+        "launching": "启动中...",
+        "running": "游戏正在运行"
+    },
+    "downloads": {
+        "title": "下载",
+        "tabs": {
+            "versions": "版本",
+            "modpacks": "整合包",
+            "mods": "模组",
+            "resourcepacks": "资源包"
+        },
+        "searchPlaceholder": "搜索整合包...",
+        "platform": "平台",
+        "sort": "排序方式",
+        "sortPopularity": "流行度",
+        "sortDownloads": "下载量",
+        "sortLatest": "最新",
+        "install": "安装",
+        "installed": "已安装！",
+        "selectVersion": "选择版本",
+        "searchModsPlaceholder": "搜索模组...",
+        "searchResourcePacksPlaceholder": "搜索资源包...",
+        "downloadMod": "下载",
+        "resourcepacks": "资源包"
+    },
+    "accounts": {
+        "title": "账户管理",
+        "microsoft": "使用 Microsoft 登录",
+        "offline": "离线",
+        "usernamePlaceholder": "用户名",
+        "noAccount": "无账户",
+        "remove": "移除账户",
+        "selected": "已选择",
+        "microsoftType": "Microsoft",
+        "offlineType": "离线"
+    },
+    "settings": {
+        "title": "设置",
+        "appearance": "外观",
+        "theme": "主题",
+        "themeDesc": "选择配色方案",
+        "themeDark": "深色",
+        "themeLight": "浅色",
+        "accentColor": "强调色",
+        "accentColorDesc": "选择界面强调色",
+        "language": "语言",
+        "languageDesc": "界面语言",
+        "game": "游戏",
+        "gamePath": "游戏路径",
+        "gamePathDesc": ".minecraft 文件夹",
+        "browse": "浏览",
+        "java": "Java",
+        "memory": "内存",
+        "memoryDesc": "分配给游戏的内存 (RAM)",
+        "minMemory": "最小：",
+        "maxMemory": "最大：",
+        "javaPath": "Java 路径",
+        "javaPathDesc": "留空以进行自动搜索",
+        "selectJava": "选择 Java 可执行文件",
+        "javaArgs": "Java 参数",
+        "javaArgsDesc": "额外 JVM 参数",
+        "save": "保存设置",
+        "saved": "设置已保存！"
+    },
+    "errors": {
+        "noAccount": "选择一个账户开始游戏",
+        "noVersion": "选择一个游戏版本",
+        "launchFailed": "启动游戏失败",
+        "loginFailed": "登录失败",
+        "invalidUsername": "输入有效的名称 (3-16 个字符，字母、数字、下划线)"
+    },
+    "modal": {
+        "save": "保存",
+        "cancel": "取消",
+        "ok": "确定"
+    }
+}
