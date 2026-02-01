@@ -1,10 +1,10 @@
 # WTFLauncher
 
-- Современный лаунчер для Minecraft с красивым интерфейсом и широким функционалом
-- A modern Minecraft launcher with a beautiful interface and extensive functionality
+- __Современный лаунчер для Minecraft с красивым интерфейсом и широким функционалом__
+- __A modern Minecraft launcher with a beautiful interface and extensive functionality__
 
 ![WTFLauncher](https://img.shields.io/badge/version-1.1.0-6c5ce7?style=for-the-badge)
-![Site (Сайт)](https://www.wtflauncher.pp.ua/)
+[WTFLauncher Official Site](https://www.wtflauncher.pp.ua/)
 
 ## ✨ Возможности
  ✨ Features
