@@ -138,10 +138,6 @@ function initializeElements() {
         settingTheme: document.getElementById('setting-theme'),
         settingAccentColor: document.getElementById('setting-accent-color'),
         accentPresets: document.querySelectorAll('.accent-preset'),
-        settingBgColor: document.getElementById('setting-bg-color'),
-        settingBgImage: document.getElementById('setting-bg-image'),
-        btnBrowseBg: document.getElementById('btn-browse-bg'),
-        btnResetBg: document.getElementById('btn-reset-bg'),
         settingLanguage: document.getElementById('setting-language'),
         settingGamePath: document.getElementById('setting-game-path'),
         btnBrowsePath: document.getElementById('btn-browse-path'),
@@ -563,47 +559,6 @@ function setupEventListeners() {
     // Make applyAccentColor globally available for init
     window.applyAccentColor = applyAccentColor;
 
-    // Background Customization Logic
-    const applyBackground = (bgColor, bgImage) => {
-        const appElement = document.getElementById('app');
-        if (!appElement) return;
-
-        if (bgImage && bgImage.trim() !== '') {
-            // Image takes precedence
-            appElement.style.background = `url('${bgImage}') center/cover no-repeat`;
-        } else if (bgColor) {
-            // Solid color
-            appElement.style.background = bgColor;
-        } else {
-            // Reset to default gradient
-            appElement.style.background = '';
-        }
-    };
-
-    elements.settingBgColor.addEventListener('input', (e) => {
-        applyBackground(e.target.value, elements.settingBgImage.value);
-    });
-
-    elements.btnBrowseBg.addEventListener('click', async () => {
-        const path = await window.electronAPI.selectFile({
-            title: 'Select Background Image',
-            filters: [
-                { name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp'] }
-            ]
-        });
-        if (path) {
-            elements.settingBgImage.value = path;
-            applyBackground(elements.settingBgColor.value, path);
-        }
-    });
-
-    elements.btnResetBg.addEventListener('click', () => {
-        elements.settingBgImage.value = '';
-        elements.settingBgColor.value = '#0f0f1a';
-        applyBackground(null, null);
-    });
-
-    window.applyBackground = applyBackground;
 
     elements.settingLanguage.addEventListener('change', async (e) => {
         await window.i18n.loadLanguage(e.target.value);
