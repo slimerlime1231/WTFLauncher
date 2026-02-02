@@ -1484,20 +1484,11 @@ ipcMain.handle('get-app-path', () => {
 const DEFAULT_NEWS = {
     launcher: [
         {
-            title: "WTFLauncher Release",
-            date: "2026-01-20",
+            title: "WTFLauncher v1.1.0 Release",
+            date: "2026-02-02",
             image: "",
-            text: "Test",
+            text: "We're excited to introduce the first version of the WTFLauncher launcher. Our launcher features a beautiful design, security, and high performance. It also offers extensive functionality! You can download modpacks, mods, and resource packs from trusted resources like Modrinth and CurseForge! The launcher is actively being improved, and we actively consider our users' feedback and incorporate their ideas into the launcher. Stay up-to-date on the latest news in our Discord channel or directly in the launcher!",
             link: ""
-        }
-    ],
-    minecraft: [
-        {
-            title: "Winter Drop: The Pale Garden",
-            date: "2024-12-05",
-            image: "https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Winter-Drop-Key-Art.jpg",
-            text: "Explore the eerie Pale Garden biome! Encounter the Creaking, a mob that only moves when you aren't looking. Harvest pale oak wood and moss. A hauntingly beautiful addition to your world.",
-            link: "https://www.minecraft.net/en-us/article/winter-drop-pale-garden"
         }
     ]
 };
