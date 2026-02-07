@@ -108,6 +108,17 @@
         "noVersion": "Wählen Sie eine Spielversion aus",
         "launchFailed": "Spiel konnte nicht gestartet werden",
         "loginFailed": "Anmeldung fehlgeschlagen",
-        "invalidUsername": "Gültigen Namen eingeben (3-16 Zeichen, Buchstaben, Zahlen, _)"
+        "invalidUsername": "Gültigen Namen eingeben (3-16 Zeichen, Buchstaben, Zahlen, _)",
+        "javaNotFound": "Java nicht gefunden",
+        "javaNotFoundMessage": "Java ist nicht auf Ihrem System installiert.",
+        "javaNotFoundDetail": "Minecraft erfordert Java zum Ausführen. Möchten Sie Java 21 automatisch herunterladen und installieren?",
+        "javaDownloadFailed": "Fehler beim Herunterladen von Java. Bitte installieren Sie es manuell.",
+        "javaRequired": "Java ist erforderlich, um Minecraft auszuführen"
+    },
+    "java": {
+        "downloading": "Java wird heruntergeladen...",
+        "extracting": "Dateien werden extrahiert...",
+        "completed": "Java erfolgreich installiert!",
+        "downloadProgress": "Heruntergeladen: "
     }
 }

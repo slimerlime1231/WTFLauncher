@@ -121,7 +121,18 @@
         "noVersion": "Выберите версию игры",
         "launchFailed": "Ошибка запуска игры",
         "loginFailed": "Ошибка входа",
-        "invalidUsername": "Введите корректное имя (3-16 символов, буквы, цифры, _)"
+        "invalidUsername": "Введите корректное имя (3-16 символов, буквы, цифры, _)",
+        "javaNotFound": "Java не найдена",
+        "javaNotFoundMessage": "Java не установлена на вашей системе.",
+        "javaNotFoundDetail": "Minecraft требует Java для запуска. Хотите ли вы автоматически скачать и установить Java 21?",
+        "javaDownloadFailed": "Не удалось загрузить Java. Установите её вручную.",
+        "javaRequired": "Java требуется для запуска Minecraft"
+    },
+    "java": {
+        "downloading": "Загрузка Java...",
+        "extracting": "Извлечение файлов...",
+        "completed": "Java успешно установлена!",
+        "downloadProgress": "Загружено: "
     },
     "monitoring": {
         "title": "Мониторинг",

@@ -12,6 +12,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     openFolder: (path) => ipcRenderer.invoke('open-folder', path),
     selectIcon: () => ipcRenderer.invoke('select-icon'),
 
+    checkJava: () => ipcRenderer.invoke('check-java'),
+    askDownloadJava: () => ipcRenderer.invoke('ask-download-java'),
+    downloadJava: () => ipcRenderer.invoke('download-java'),
+    onJavaDownloadProgress: (callback) => ipcRenderer.on('java-download-progress', (event, data) => callback(data)),
+
     getAccounts: () => ipcRenderer.invoke('get-accounts'),
     getSelectedAccount: () => ipcRenderer.invoke('get-selected-account'),
     saveAccounts: (accounts) => ipcRenderer.invoke('save-accounts', accounts),

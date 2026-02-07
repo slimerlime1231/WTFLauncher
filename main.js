@@ -6,6 +6,9 @@ const Store = require('electron-store');
 const { Client } = require('minecraft-launcher-core');
 const { Auth } = require('msmc');
 const fs = require('fs-extra');
+const fetch = require('node-fetch');
+const AdmZip = require('adm-zip');
+const { exec } = require('child_process');
 
 async function withRetry(fn, retries = 3, delay = 1000) {
     for (let i = 0; i < retries; i++) {
@@ -55,6 +58,104 @@ function findJavaPath() {
     return null;
 }
 
+function isJavaInstalled() {
+    return findJavaPath() !== null;
+}
+
+async function downloadJava() {
+    const tempDir = path.join(os.tmpdir(), 'java-download');
+    const javaInstallDir = 'C:\\Program Files\\Temurin';
+    
+    try {
+        fs.ensureDirSync(tempDir);
+        
+        const downloadUrl = 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.1%2B12/OpenJDK21U-jdk_x64_windows_hotspot_21.0.1_12.zip';
+        
+        const fileName = 'java-21.zip';
+        const filePath = path.join(tempDir, fileName);
+        
+        if (mainWindow) {
+            mainWindow.webContents.send('java-download-progress', { status: 'downloading', progress: 0, message: 'Starting download...' });
+        }
+        
+        const response = await fetch(downloadUrl);
+        if (!response.ok) {
+            throw new Error(`Download failed: ${response.statusText}`);
+        }
+        
+        const totalSize = parseInt(response.headers.get('content-length') || '0', 10);
+        let downloadedSize = 0;
+        
+        const { Writable } = require('stream');
+        const writeStream = fs.createWriteStream(filePath);
+        
+        response.body.on('data', (chunk) => {
+            downloadedSize += chunk.length;
+            const progress = totalSize > 0 ? Math.round((downloadedSize / totalSize) * 50) : 0;
+            if (mainWindow) {
+                mainWindow.webContents.send('java-download-progress', { 
+                    status: 'downloading', 
+                    progress, 
+                    message: `Downloaded: ${Math.round(downloadedSize / 1024 / 1024)}MB` 
+                });
+            }
+        });
+
+        await new Promise((resolve, reject) => {
+            response.body.pipe(writeStream);
+            writeStream.on('finish', resolve);
+            writeStream.on('error', reject);
+            response.body.on('error', reject);
+        });
+        
+        if (mainWindow) {
+            mainWindow.webContents.send('java-download-progress', { status: 'extracting', progress: 50, message: 'Extracting files...' });
+        }
+        
+        const zip = new AdmZip(filePath);
+        fs.ensureDirSync(javaInstallDir);
+        
+        const extractedDir = path.join(tempDir, 'java-extracted');
+        zip.extractAllTo(extractedDir, true);
+        
+        const extractedDirs = fs.readdirSync(extractedDir);
+        if (extractedDirs.length === 0) {
+            throw new Error('Failed to extract Java');
+        }
+        
+        const jdkDir = extractedDirs[0];
+        const sourcePath = path.join(extractedDir, jdkDir);
+        const destPath = path.join(javaInstallDir, jdkDir);
+        
+        if (fs.existsSync(destPath)) {
+            fs.removeSync(destPath);
+        }
+        
+        fs.moveSync(sourcePath, destPath);
+        
+        if (mainWindow) {
+            mainWindow.webContents.send('java-download-progress', { status: 'completed', progress: 100, message: 'Java installed successfully!' });
+        }
+        
+        setTimeout(() => {
+            try {
+                fs.removeSync(tempDir);
+            } catch (e) {
+                console.error('Error cleaning up temp files:', e);
+            }
+        }, 1000);
+        
+        return true;
+    } catch (error) {
+        console.error('Error downloading Java:', error);
+        if (mainWindow) {
+            mainWindow.webContents.send('java-download-progress', { status: 'error', error: error.message });
+        }
+        return false;
+    }
+}
+
+
 
 const store = new Store({
     defaults: {
@@ -70,6 +171,38 @@ const store = new Store({
         selectedAccount: null
     }
 });
+
+let localeStrings = {};
+
+function loadLocaleStrings() {
+    const settings = store.get('settings');
+    const lang = settings.language || 'ru';
+    const localeFile = path.join(__dirname, 'src', 'locales', `${lang}.json`);
+    
+    try {
+        if (fs.existsSync(localeFile)) {
+            localeStrings = JSON.parse(fs.readFileSync(localeFile, 'utf-8'));
+        }
+    } catch (err) {
+        console.error('Error loading locale file:', err);
+        localeStrings = {};
+    }
+}
+
+function t(key) {
+    const keys = key.split('.');
+    let value = localeStrings;
+    
+    for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+            value = value[k];
+        } else {
+            return key;
+        }
+    }
+    
+    return value;
+}
 
 let mainWindow;
 
@@ -97,7 +230,10 @@ function createWindow() {
     }
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+    loadLocaleStrings();
+    createWindow();
+});
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -146,6 +282,29 @@ ipcMain.handle('select-icon', async () => {
         return { success: true, path: result.filePaths[0] };
     }
     return { success: false };
+});
+
+ipcMain.handle('check-java', async () => {
+    return { installed: isJavaInstalled() };
+});
+
+ipcMain.handle('ask-download-java', async () => {
+    const result = await dialog.showMessageBox(mainWindow, {
+        type: 'question',
+        buttons: ['Download', 'Cancel'],
+        title: 'Java Not Found',
+        message: 'Java is not installed on your system.',
+        detail: 'Minecraft requires Java to run. Would you like to download and install Java 21 automatically?',
+        defaultId: 0,
+        cancelId: 1
+    });
+
+    return { downloadConfirmed: result.response === 0 };
+});
+
+ipcMain.handle('download-java', async () => {
+    const success = await downloadJava();
+    return { success };
 });
 
 ipcMain.handle('save-profile', async (event, profile) => {
@@ -831,6 +990,7 @@ ipcMain.handle('get-settings', () => {
 
 ipcMain.handle('save-settings', (event, settings) => {
     store.set('settings', settings);
+    loadLocaleStrings();
     return true;
 });
 
@@ -1016,7 +1176,6 @@ ipcMain.handle('install-vanilla-version', async (event, options) => {
             if (fs.existsSync(fabricJsonPath)) {
                 versionId = fabricId;
             } else {
-                // Download Fabric Profile JSON
                 try {
                     const fetch = require('node-fetch');
                     const url = `https://meta.fabricmc.net/v2/versions/loader/${options.version}/${options.modloaderVersion}/profile/json`;
@@ -1091,6 +1250,27 @@ ipcMain.handle('install-vanilla-version', async (event, options) => {
 
 ipcMain.handle('launch-game', async (event, options) => {
     try {
+        if (!isJavaInstalled()) {
+            const result = await dialog.showMessageBox(mainWindow, {
+                type: 'question',
+                buttons: [t('modal.save') || 'Download', t('modal.cancel') || 'Cancel'],
+                title: t('errors.javaNotFound'),
+                message: t('errors.javaNotFoundMessage'),
+                detail: t('errors.javaNotFoundDetail'),
+                defaultId: 0,
+                cancelId: 1
+            });
+
+            if (result.response === 0) {
+                const success = await downloadJava();
+                if (!success) {
+                    return { success: false, error: t('errors.javaDownloadFailed') };
+                }
+            } else {
+                return { success: false, error: t('errors.javaRequired') };
+            }
+        }
+
         const settings = store.get('settings');
 
         const accounts = store.get('accounts');

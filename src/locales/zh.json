@@ -132,7 +132,18 @@
         "noVersion": "选择一个游戏版本",
         "launchFailed": "启动游戏失败",
         "loginFailed": "登录失败",
-        "invalidUsername": "输入有效的名称 (3-16 个字符，字母、数字、下划线)"
+        "invalidUsername": "输入有效的名称 (3-16 个字符，字母、数字、下划线)",
+        "javaNotFound": "未找到 Java",
+        "javaNotFoundMessage": "您的系统上未安装 Java。",
+        "javaNotFoundDetail": "Minecraft 需要 Java 才能运行。您想要自动下载并安装 Java 21 吗？",
+        "javaDownloadFailed": "无法下载 Java。请手动安装。",
+        "javaRequired": "运行 Minecraft 需要 Java"
+    },
+    "java": {
+        "downloading": "正在下载 Java...",
+        "extracting": "正在提取文件...",
+        "completed": "Java 安装成功！",
+        "downloadProgress": "已下载: "
     },
     "modal": {
         "save": "保存",
