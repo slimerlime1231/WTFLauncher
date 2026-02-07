@@ -1413,8 +1413,9 @@ function renderAccounts() {
     state.accounts.forEach(account => {
         const card = document.createElement('div');
         card.className = `account-card${account.id === state.selectedAccountId ? ' selected' : ''}`;
+        const skinUrl = `https://mc-heads.net/avatar/${account.name}/48`;
         card.innerHTML = `
-            <img class="account-avatar" src="${account.avatar}" alt="Avatar">
+            <img class="account-avatar" src="${skinUrl}" alt="Avatar">
             <div class="account-details">
                 <span class="account-name">${account.name}</span>
                 <span class="account-type">${account.type === 'microsoft'
@@ -1443,8 +1444,9 @@ function updateCurrentAccount() {
     const account = state.accounts.find(a => a.id === state.selectedAccountId);
 
     if (account) {
+        const skinUrl = `https://mc-heads.net/avatar/${account.name}/48`;
         elements.currentAccount.innerHTML = `
-            <img class="account-avatar" src="${account.avatar}" alt="Avatar">
+            <img class="account-avatar" src="${skinUrl}" alt="Avatar">
             <div class="account-info">
                 <span class="account-name">${account.name}</span>
                 <span class="account-type">${account.type === 'microsoft'

@@ -1063,7 +1063,15 @@ ipcMain.handle('login-microsoft', async () => {
 
         return { success: true, account };
     } catch (error) {
-        return { success: false, error: error.message };
+        let errMsg = '';
+        if (typeof error === 'string') {
+            errMsg = error;
+        } else if (error && typeof error === 'object' && error.message) {
+            errMsg = error.message;
+        } else {
+            errMsg = JSON.stringify(error);
+        }
+        return { success: false, error: errMsg };
     }
 });
 
