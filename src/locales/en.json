@@ -118,6 +118,7 @@
         "saved": "Settings saved!"
     },
     "errors": {
+        "error": "Error",
         "noAccount": "Select an account to play",
         "noVersion": "Select a game version",
         "launchFailed": "Failed to launch game",

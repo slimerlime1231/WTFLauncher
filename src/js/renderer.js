@@ -314,10 +314,10 @@ async function loginOverlayMicrosoft() {
             hideLoginOverlay();
             switchPage('home');
         } else {
-            alert(window.i18n.t('errors.loginFailed') + ': ' + result.error);
+            await showMainModal({ title: window.i18n.t('errors.error'), message: window.i18n.t('errors.loginFailed') + ': ' + result.error });
         }
     } catch (error) {
-        alert(window.i18n.t('errors.loginFailed') + ': ' + error.message);
+        await showMainModal({ title: window.i18n.t('errors.error'), message: window.i18n.t('errors.loginFailed') + ': ' + error.message });
     }
 
     if (!elements.loginOverlay.classList.contains('hidden')) {
@@ -330,7 +330,8 @@ async function loginOverlayOffline() {
     const username = elements.loginOfflineUsername.value.trim();
 
     if (username.length < 1) {
-        alert(window.i18n.t('errors.invalidUsername'));
+        await showMainModal({ title: window.i18n.t('errors.error'), message: window.i18n.t('errors.invalidUsername') });
+        elements.loginOfflineUsername.focus();
         return;
     }
 
@@ -343,7 +344,8 @@ async function loginOverlayOffline() {
             switchPage('home');
         }
     } catch (error) {
-        alert("Login Error: " + error.message);
+        await showMainModal({ title: window.i18n.t('errors.error'), message: "Login Error: " + error.message });
+        elements.loginOfflineUsername.focus();
     }
 }
 
@@ -405,7 +407,7 @@ async function createProfile() {
         });
 
         if (!downloadResult.success) {
-            alert(`Ошибка загрузки: ${downloadResult.error}`);
+            await showMainModal({ title: window.i18n.t('errors.error'), message: `Ошибка загрузки: ${downloadResult.error}` });
             return;
         }
 
@@ -418,7 +420,7 @@ async function createProfile() {
 
         showToast(`Версия ${profile.name} успешно установлена!`, 'success');
     } catch (err) {
-        alert(`Ошибка: ${err.message}`);
+        await showMainModal({ title: window.i18n.t('errors.error'), message: `Ошибка: ${err.message}` });
     } finally {
         setTimeout(() => {
             elements.progressContainer.classList.add('hidden');
@@ -429,327 +431,264 @@ async function createProfile() {
 
 
 function setupEventListeners() {
-    if (elements.btnLoginMicrosoft) elements.btnLoginMicrosoft.addEventListener('click', loginOverlayMicrosoft);
-    if (elements.btnLoginOffline) {
-        elements.btnLoginOffline.addEventListener('click', () => {
-            loginOverlayOffline();
-        });
-    }
-
-    if (elements.loginOfflineUsername) {
-        elements.loginOfflineUsername.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') loginOverlayOffline();
-        });
-    }
-
-    if (elements.btnMinimize) elements.btnMinimize.addEventListener('click', () => window.electronAPI.minimize());
-    if (elements.btnMaximize) elements.btnMaximize.addEventListener('click', () => window.electronAPI.maximize());
-    if (elements.btnClose) elements.btnClose.addEventListener('click', () => window.electronAPI.close());
-    if (elements.btnDiscord) {
-        elements.btnDiscord.addEventListener('click', () => {
-            window.electronAPI.openExternal('https://discord.gg/sCntAxZrV7');
-        });
-    }
-
-    if (elements.btnTitleSettings) {
-        elements.btnTitleSettings.addEventListener('click', () => {
-            switchPage('settings');
-        });
-    }
-
-    elements.navItems.forEach(item => {
-        item.addEventListener('click', () => switchPage(item.dataset.page));
-    });
-
-    elements.filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => filterVersions(btn.dataset.filter));
-    });
-
-    elements.modloaderBtns.forEach(btn => {
-        btn.addEventListener('click', () => selectModloader(btn.dataset.loader));
-    });
-
-    elements.versionSelect.addEventListener('change', () => {
-        if (state.selectedModloader !== 'vanilla') {
-            loadModloaderVersions();
-        }
-    });
-
-    elements.btnCreateProfile.addEventListener('click', createProfile);
-
-    elements.launchBtn.addEventListener('click', () => {
-        if (state.isPlaying) {
-            stopGame();
-        } else {
-            launchGame();
-        }
-    });
-
-    elements.currentAccount.addEventListener('click', () => switchPage('accounts'));
-    elements.currentAccount.style.cursor = 'pointer';
-
-    if (elements.deleteProfileBtn) {
-        elements.deleteProfileBtn.addEventListener('click', async () => {
-            const index = elements.profileSelect.value;
-            if (index === "" || index === null) return;
-
-            if (confirm(window.i18n.t('home.deleteConfirm'))) {
-                const success = await window.electronAPI.deleteProfile(parseInt(index));
-                if (success) {
-                    state.settings = await window.electronAPI.getSettings();
-                    await loadInstalledProfiles();
-                }
-            }
-        });
-    }
-
-    elements.btnMicrosoft.addEventListener('click', loginMicrosoft);
-    elements.btnOffline.addEventListener('click', loginOffline);
-
-    elements.settingTheme.addEventListener('change', (e) => {
-        document.documentElement.setAttribute('data-theme', e.target.value);
-    });
-
-    // Accent Color Logic
-    const applyAccentColor = (hex) => {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-
-        document.documentElement.style.setProperty('--accent', hex);
-        // Slightly brighter for hover
-        document.documentElement.style.setProperty('--accent-hover', adjustColorBrightness(hex, 15));
-        // Opacity for glow
-        document.documentElement.style.setProperty('--accent-glow', `rgba(${r}, ${g}, ${b}, 0.4)`);
-
-        elements.settingAccentColor.value = hex;
-    };
-
-    function adjustColorBrightness(hex, percent) {
-        let r = parseInt(hex.substring(1, 3), 16);
-        let g = parseInt(hex.substring(3, 5), 16);
-        let b = parseInt(hex.substring(5, 7), 16);
-
-        r = parseInt(r * (100 + percent) / 100);
-        g = parseInt(g * (100 + percent) / 100);
-        b = parseInt(b * (100 + percent) / 100);
-
-        r = (r < 255) ? r : 255;
-        g = (g < 255) ? g : 255;
-        b = (b < 255) ? b : 255;
-
-        const rr = ((r.toString(16).length == 1) ? "0" + r.toString(16) : r.toString(16));
-        const gg = ((g.toString(16).length == 1) ? "0" + g.toString(16) : g.toString(16));
-        const bb = ((b.toString(16).length == 1) ? "0" + b.toString(16) : b.toString(16));
-
-        return "#" + rr + gg + bb;
-    }
-
-    elements.settingAccentColor.addEventListener('input', (e) => {
-        applyAccentColor(e.target.value);
-    });
-
-    elements.accentPresets.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const color = btn.dataset.color;
-            applyAccentColor(color);
-        });
-    });
-
-    // Make applyAccentColor globally available for init
-    window.applyAccentColor = applyAccentColor;
-
-
-    elements.settingLanguage.addEventListener('change', async (e) => {
-        await window.i18n.loadLanguage(e.target.value);
-    });
-
-    elements.btnBrowsePath.addEventListener('click', async () => {
-        const path = await window.electronAPI.selectFolder();
-        if (path) {
-            elements.settingGamePath.value = path;
-        }
-    });
-
-    elements.btnOpenPath.addEventListener('click', () => {
-        const path = elements.settingGamePath.value;
-        if (path) {
-            window.electronAPI.openFolder(path);
-        }
-    });
-
-    elements.btnBrowseJava.addEventListener('click', async () => {
-        const path = await window.electronAPI.selectFile({
-            title: window.i18n.t('settings.selectJava'),
-            filters: [{ name: 'Java Executable', extensions: ['exe'] }]
-        });
-        if (path) {
-            elements.settingJavaPath.value = path;
-        }
-    });
-
-    elements.settingMinMemory.addEventListener('input', (e) => {
-        const value = parseInt(e.target.value);
-        elements.minMemoryValue.textContent = `${value} MB`;
-
-        if (value > parseInt(elements.settingMaxMemory.value)) {
-            elements.settingMaxMemory.value = value;
-            elements.maxMemoryValue.textContent = `${value} MB`;
-        }
-    });
-
-    elements.settingMaxMemory.addEventListener('input', (e) => {
-        const value = parseInt(e.target.value);
-        elements.maxMemoryValue.textContent = `${value} MB`;
-
-        if (value < parseInt(elements.settingMinMemory.value)) {
-            elements.settingMinMemory.value = value;
-            elements.minMemoryValue.textContent = `${value} MB`;
-        }
-    });
-
-    elements.btnSaveSettings.addEventListener('click', saveSettings);
-
-    elements.tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.dataset.target;
-
-            elements.tabBtns.forEach(b => b.classList.toggle('active', b === btn));
-            elements.tabContents.forEach(c => c.classList.toggle('active', c.id === target));
-
-            if (target === 'tab-modpacks' && elements.modpackGrid.children.length <= 1) {
-                searchModpacks();
-            }
-            if (target === 'tab-mods' && elements.modGrid && elements.modGrid.children.length <= 1) {
-                searchMods();
-            }
-            if (target === 'tab-resourcepacks' && elements.resourcePackGrid && elements.resourcePackGrid.children.length <= 1) {
-                searchResourcePacks();
-            }
-        });
-    });
-
-    elements.modpackSearchInput.addEventListener('input', (e) => {
-        clearTimeout(state.modpackSearchTimeout);
-        state.modpackSearchTimeout = setTimeout(() => {
-            searchModpacks();
-        }, 600);
-    });
-
-    elements.platformBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            state.currentModpackPlatform = btn.dataset.platform;
-            elements.platformBtns.forEach(b => b.classList.toggle('active', b === btn));
-            searchModpacks();
-        });
-    });
-
-    elements.modpackSortSelect.addEventListener('change', (e) => {
-        state.currentModpackSort = e.target.value;
-        searchModpacks();
-    });
-
-    elements.closeVersionModal.addEventListener('click', () => {
-        elements.modpackVersionModal.classList.add('hidden');
-        if (elements.modpackSearchInput) {
-            const h = elements.modpackSearchInput.closest('.modpacks-header');
-            if (h) {
-                h.classList.remove('instant-hidden');
-                h.style.visibility = '';
-            }
-        }
-    });
-
-    window.onclick = (event) => {
-        if (event.target === elements.modpackVersionModal) {
-            elements.modpackVersionModal.classList.add('hidden');
-            if (elements.modpackSearchInput) {
-                const h = elements.modpackSearchInput.closest('.modpacks-header');
-                if (h) {
-                    h.classList.remove('instant-hidden');
-                    h.style.visibility = '';
-                }
-            }
-        }
-        if (event.target === elements.modVersionModal) {
-            elements.modVersionModal.classList.add('hidden');
-            if (elements.modSearchInput) {
-                const h = elements.modSearchInput.closest('.modpacks-header');
-                if (h) {
-                    h.classList.remove('instant-hidden');
-                    h.style.visibility = ''; h.style.transition = '';
-                }
-            }
-            if (elements.resourcePackSearchInput) {
-                const h = elements.resourcePackSearchInput.closest('.modpacks-header');
-                if (h) {
-                    h.classList.remove('instant-hidden');
-                    h.style.visibility = ''; h.style.transition = '';
-                }
-            }
-        }
-    };
-
-    if (elements.modSearchInput) {
-        elements.modSearchInput.addEventListener('input', () => {
-            clearTimeout(state.modSearchTimeout);
-            state.modSearchTimeout = setTimeout(() => {
-                searchMods();
-            }, 600);
-        });
-    }
-
-    if (elements.modSortSelect) {
-        elements.modSortSelect.addEventListener('change', (e) => {
-            state.currentModSort = e.target.value;
-            searchMods();
-        });
-    }
-
-    if (elements.modPlatformBtns) {
-        elements.modPlatformBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                state.currentModPlatform = btn.dataset.platform;
-                elements.modPlatformBtns.forEach(b => b.classList.toggle('active', b === btn));
-                searchMods();
+    try {
+        if (elements.btnLoginMicrosoft) elements.btnLoginMicrosoft.addEventListener('click', loginOverlayMicrosoft);
+        if (elements.btnLoginOffline) {
+            elements.btnLoginOffline.addEventListener('click', () => {
+                loginOverlayOffline();
             });
-        });
-    }
+        }
 
-    if (elements.closeModVersionModal) {
-        elements.closeModVersionModal.addEventListener('click', () => {
-            elements.modVersionModal.classList.add('hidden');
-            if (elements.modSearchInput) {
-                const h = elements.modSearchInput.closest('.modpacks-header');
-                if (h) {
-                    h.classList.remove('instant-hidden');
-                    h.style.visibility = ''; h.style.transition = '';
+        if (elements.loginOfflineUsername) {
+            elements.loginOfflineUsername.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') loginOverlayOffline();
+            });
+        }
+
+        if (elements.offlineUsername) {
+            elements.offlineUsername.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') loginOffline();
+            });
+        }
+
+        if (elements.btnMinimize) elements.btnMinimize.addEventListener('click', () => window.electronAPI.minimize());
+        if (elements.btnMaximize) elements.btnMaximize.addEventListener('click', () => window.electronAPI.maximize());
+        if (elements.btnClose) elements.btnClose.addEventListener('click', () => window.electronAPI.close());
+        if (elements.btnDiscord) {
+            elements.btnDiscord.addEventListener('click', () => {
+                window.electronAPI.openExternal('https://discord.gg/sCntAxZrV7');
+            });
+        }
+
+        if (elements.btnTitleSettings) {
+            elements.btnTitleSettings.addEventListener('click', () => {
+                switchPage('settings');
+            });
+        }
+
+        if (elements.navItems) {
+            elements.navItems.forEach(item => {
+                item.addEventListener('click', () => switchPage(item.dataset.page));
+            });
+        }
+
+        if (elements.filterBtns) {
+            elements.filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => filterVersions(btn.dataset.filter));
+            });
+        }
+
+        if (elements.modloaderBtns) {
+            elements.modloaderBtns.forEach(btn => {
+                btn.addEventListener('click', () => selectModloader(btn.dataset.loader));
+            });
+        }
+
+        if (elements.versionSelect) {
+            elements.versionSelect.addEventListener('change', () => {
+                if (state.selectedModloader !== 'vanilla') {
+                    loadModloaderVersions();
                 }
-            }
-            if (elements.resourcePackSearchInput) {
-                const h = elements.resourcePackSearchInput.closest('.modpacks-header');
-                if (h) {
-                    h.classList.remove('instant-hidden');
-                    h.style.visibility = ''; h.style.transition = '';
+            });
+        }
+
+        if (elements.btnCreateProfile) elements.btnCreateProfile.addEventListener('click', createProfile);
+
+        if (elements.launchBtn) {
+            elements.launchBtn.addEventListener('click', () => {
+                if (state.isPlaying) {
+                    stopGame();
+                } else {
+                    launchGame();
                 }
-            }
-        });
-    }
+            });
+        }
 
-    if (elements.btnSidebarSettings) {
-        elements.btnSidebarSettings.addEventListener('click', (e) => {
-            e.stopPropagation(); switchPage('settings');
-        });
-    }
+        if (elements.currentAccount) {
+            elements.currentAccount.addEventListener('click', () => switchPage('accounts'));
+            elements.currentAccount.style.cursor = 'pointer';
+        }
 
-    if (elements.resourcePackSearchInput) {
-        elements.resourcePackSearchInput.addEventListener('input', () => {
-            clearTimeout(state.resourcePackSearchTimeout);
-            state.resourcePackSearchTimeout = setTimeout(() => {
-                searchResourcePacks();
-            }, 600);
-        });
-    }
+        if (elements.deleteProfileBtn) {
+            elements.deleteProfileBtn.addEventListener('click', async () => {
+                const index = elements.profileSelect.value;
+                if (index === "" || index === null) return;
+
+                const result = await showMainModal({
+                    title: window.i18n.t('profiles.delete') || 'Delete Profile',
+                    message: window.i18n.t('home.deleteConfirm'),
+                    type: 'confirm'
+                });
+
+                if (result.success) {
+                    const success = await window.electronAPI.deleteProfile(parseInt(index));
+                    if (success) {
+                        state.settings = await window.electronAPI.getSettings();
+                        await loadInstalledProfiles();
+                    }
+                }
+            });
+        }
+
+        if (elements.btnMicrosoft) elements.btnMicrosoft.addEventListener('click', loginMicrosoft);
+        if (elements.btnOffline) elements.btnOffline.addEventListener('click', loginOffline);
+
+        if (elements.settingTheme) {
+            elements.settingTheme.addEventListener('change', (e) => {
+                document.documentElement.setAttribute('data-theme', e.target.value);
+            });
+        }
+
+        // Accent Color Logic
+        const applyAccentColor = (hex) => {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+
+            document.documentElement.style.setProperty('--accent', hex);
+            // Slightly brighter for hover
+            document.documentElement.style.setProperty('--accent-hover', adjustColorBrightness(hex, 15));
+            // Opacity for glow
+            document.documentElement.style.setProperty('--accent-glow', `rgba(${r}, ${g}, ${b}, 0.4)`);
+
+            if (elements.settingAccentColor) elements.settingAccentColor.value = hex;
+        };
+
+        function adjustColorBrightness(hex, percent) {
+            let r = parseInt(hex.substring(1, 3), 16);
+            let g = parseInt(hex.substring(3, 5), 16);
+            let b = parseInt(hex.substring(5, 7), 16);
+
+            r = parseInt(r * (100 + percent) / 100);
+            g = parseInt(g * (100 + percent) / 100);
+            b = parseInt(b * (100 + percent) / 100);
+
+            r = (r < 255) ? r : 255;
+            g = (g < 255) ? g : 255;
+            b = (b < 255) ? b : 255;
+
+            const RR = ((r.toString(16).length == 1) ? "0" + r.toString(16) : r.toString(16));
+            const GG = ((g.toString(16).length == 1) ? "0" + g.toString(16) : g.toString(16));
+            const BB = ((b.toString(16).length == 1) ? "0" + b.toString(16) : b.toString(16));
+
+            return "#" + RR + GG + BB;
+        }
+
+        window.applyAccentColor = applyAccentColor;
+
+        if (elements.settingAccentColor) {
+            elements.settingAccentColor.addEventListener('input', (e) => {
+                applyAccentColor(e.target.value);
+            });
+        }
+
+        if (elements.accentPresets) {
+            elements.accentPresets.forEach(preset => {
+                preset.addEventListener('click', () => {
+                    const color = preset.dataset.color;
+                    applyAccentColor(color);
+                });
+            });
+        }
+
+        if (elements.settingLanguage) {
+            elements.settingLanguage.addEventListener('change', async (e) => {
+                const lang = e.target.value;
+                await window.i18n.loadLanguage(lang);
+                // Also update settings in real-time? Or wait for save.
+                // Just update UI for now.
+            });
+        }
+
+        if (elements.btnBrowsePath) {
+            elements.btnBrowsePath.addEventListener('click', async () => {
+                const path = await window.electronAPI.selectFolder();
+                if (path) {
+                    elements.settingGamePath.value = path;
+                }
+            });
+        }
+
+        if (elements.btnOpenPath) {
+            elements.btnOpenPath.addEventListener('click', () => {
+                const path = elements.settingGamePath.value;
+                if (path) {
+                    window.electronAPI.openFolder(path);
+                }
+            });
+        }
+
+        if (elements.btnBrowseJava) {
+            elements.btnBrowseJava.addEventListener('click', async () => {
+                const path = await window.electronAPI.selectFile({
+                    title: window.i18n.t('settings.selectJava'),
+                    filters: [{ name: 'Java Executable', extensions: ['exe'] }]
+                });
+                if (path) {
+                    elements.settingJavaPath.value = path;
+                }
+            });
+        }
+
+        if (elements.btnSaveSettings) {
+            elements.btnSaveSettings.addEventListener('click', saveSettings);
+        } else {
+            console.error('btnSaveSettings element not found!');
+        }
+
+        if (elements.settingMinMemory) {
+            elements.settingMinMemory.addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                elements.minMemoryValue.textContent = `${value} MB`;
+
+                if (value > parseInt(elements.settingMaxMemory.value)) {
+                    elements.settingMaxMemory.value = value;
+                    elements.maxMemoryValue.textContent = `${value} MB`;
+                }
+            });
+        }
+
+        if (elements.settingMaxMemory) {
+            elements.settingMaxMemory.addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                elements.maxMemoryValue.textContent = `${value} MB`;
+
+                if (value < parseInt(elements.settingMinMemory.value)) {
+                    elements.settingMinMemory.value = value;
+                    elements.minMemoryValue.textContent = `${value} MB`;
+                }
+            });
+        }
+
+        if (elements.tabBtns) {
+            elements.tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.dataset.target;
+
+                    elements.tabBtns.forEach(b => b.classList.toggle('active', b === btn));
+                    elements.tabContents.forEach(c => c.classList.toggle('active', c.id === target));
+
+                    if (target === 'tab-modpacks' && elements.modpackGrid.children.length <= 1) {
+                        searchModpacks();
+                    }
+                    if (target === 'tab-mods' && elements.modGrid && elements.modGrid.children.length <= 1) {
+                        searchMods();
+                    }
+                    if (target === 'tab-resourcepacks' && elements.resourcePackGrid && elements.resourcePackGrid.children.length <= 1) {
+                        searchResourcePacks();
+                    }
+                });
+            });
+        }
+
+        if (elements.modpackSearchInput) {
+            elements.modpackSearchInput.addEventListener('input', (e) => {
+                clearTimeout(state.modpackSearchTimeout);
+                state.modpackSearchTimeout = setTimeout(() => {
+                    searchModpacks();
+                }, 600);
+            });
+        }
 
     if (elements.resourcePackSortSelect) {
         elements.resourcePackSortSelect.addEventListener('change', (e) => {
@@ -825,10 +764,14 @@ function setupEventListeners() {
         elements.easterEggImage.classList.remove('easter-egg-visible');
     });
 
-    setupInfiniteScroll(elements.modpackGrid, searchModpacks);
-    setupInfiniteScroll(elements.modGrid, searchMods);
-    setupInfiniteScroll(elements.resourcePackGrid, searchResourcePacks);
-
+        setupInfiniteScroll(elements.modpackGrid, searchModpacks);
+        setupInfiniteScroll(elements.modGrid, searchMods);
+        setupInfiniteScroll(elements.resourcePackGrid, searchResourcePacks);
+        
+    } catch (err) {
+        console.error('[CRITICAL] setupEventListeners failed:', err);
+        alert('Critical Error: Failed to setup event listeners. ' + err.message);
+    }
 }
 
 function setupIPCListeners() {
@@ -1124,10 +1067,10 @@ async function installModpack(id, platform, versionId = null) {
 
             showToast(`Модпак ${result.profile.name} успешно установлен!`, 'success');
         } else {
-            alert(`Ошибка установки: ${result.error}`);
+            await showMainModal({ title: window.i18n.t('errors.error'), message: `Ошибка установки: ${result.error}` });
         }
     } catch (err) {
-        alert(`Произошла критическая ошибка при установке: ${err.message}`);
+        await showMainModal({ title: window.i18n.t('errors.error'), message: `Произошла критическая ошибка при установке: ${err.message}` });
     } finally {
         elements.progressContainer.classList.add('hidden');
         btns.forEach(b => b.disabled = false);
@@ -1363,7 +1306,7 @@ function renderModVersions(modId, versions, type = 'mod') {
 
 async function downloadMod(modId, versionId, fileName, downloadUrl, type = 'mod') {
     if (!downloadUrl) {
-        alert('Download URL not available');
+        await showMainModal({ title: window.i18n.t('errors.error'), message: 'Download URL not available' });
         return;
     }
 
@@ -1385,10 +1328,10 @@ async function downloadMod(modId, versionId, fileName, downloadUrl, type = 'mod'
             const defaultMsg = type === 'resourcepack' ? `Resource pack ${fileName} downloaded successfully!` : `Mod ${fileName} downloaded successfully!`;
             showToast(window.i18n.t(successKey, { name: fileName }) || defaultMsg, 'success');
         } else {
-            alert(`Download failed: ${result.error}`);
+            await showMainModal({ title: window.i18n.t('errors.error'), message: `Download failed: ${result.error}` });
         }
     } catch (err) {
-        alert(`Download error: ${err.message}`);
+        await showMainModal({ title: window.i18n.t('errors.error'), message: `Download error: ${err.message}` });
     } finally {
         setTimeout(() => {
             elements.progressContainer.classList.add('hidden');
@@ -1504,7 +1447,8 @@ async function loginOffline() {
     const username = elements.offlineUsername.value.trim();
 
     if (!/^[a-zA-Z0-9_]{3,16}$/.test(username)) {
-        alert(window.i18n.t('errors.invalidUsername'));
+        await showMainModal({ title: window.i18n.t('errors.error'), message: window.i18n.t('errors.invalidUsername') });
+        elements.offlineUsername.focus();
         return;
     }
 
@@ -1528,34 +1472,33 @@ function applySettingsToUI() {
 }
 
 async function saveSettings() {
+    
     state.settings = {
-        theme: elements.settingTheme.value,
-        accentColor: elements.settingAccentColor.value,
-        backgroundColor: elements.settingBgColor.value,
-        backgroundImage: elements.settingBgImage.value,
-        language: elements.settingLanguage.value,
-        gamePath: elements.settingGamePath.value,
-        javaPath: elements.settingJavaPath.value,
-        minMemory: parseInt(elements.settingMinMemory.value),
-        maxMemory: parseInt(elements.settingMaxMemory.value),
-        javaArgs: elements.settingJavaArgs.value
+        ...state.settings,
+        theme: elements.settingTheme?.value ?? state.settings.theme,
+        accentColor: elements.settingAccentColor?.value ?? state.settings.accentColor,
+        backgroundColor: elements.settingBgColor?.value ?? state.settings.backgroundColor,
+        backgroundImage: elements.settingBgImage?.value ?? state.settings.backgroundImage,
+        language: elements.settingLanguage?.value ?? state.settings.language,
+        gamePath: elements.settingGamePath?.value ?? state.settings.gamePath,
+        javaPath: elements.settingJavaPath?.value ?? state.settings.javaPath,
+        minMemory: elements.settingMinMemory ? parseInt(elements.settingMinMemory.value) : state.settings.minMemory,
+        maxMemory: elements.settingMaxMemory ? parseInt(elements.settingMaxMemory.value) : state.settings.maxMemory,
+        javaArgs: elements.settingJavaArgs?.value ?? state.settings.javaArgs
     };
 
-    await window.electronAPI.saveSettings(state.settings);
-
-    const originalText = elements.btnSaveSettings.innerHTML;
-    elements.btnSaveSettings.innerHTML = '<span>✓ ' + window.i18n.t('settings.saved') + '</span>';
-    elements.btnSaveSettings.style.background = 'var(--success)';
-
-    setTimeout(() => {
-        elements.btnSaveSettings.innerHTML = originalText;
-        elements.btnSaveSettings.style.background = '';
-    }, 2000);
+    try {
+        await window.electronAPI.saveSettings(state.settings);
+        showToast(window.i18n.t('settings.saved'), 'success');
+    } catch (err) {
+        console.error('Failed to save settings:', err);
+        showToast(err.message || 'Failed to save settings', 'error');
+    }
 }
 
 async function launchGame() {
     if (!state.selectedAccountId) {
-        alert(window.i18n.t('errors.noAccount'));
+        await showMainModal({ title: window.i18n.t('errors.error'), message: window.i18n.t('errors.noAccount') });
         switchPage('accounts');
         return;
     }
@@ -1565,7 +1508,7 @@ async function launchGame() {
     const profile = profiles[profileIndex];
 
     if (!profile) {
-        alert(window.i18n.t('errors.noVersion')); switchPage('downloads');
+        await showMainModal({ title: window.i18n.t('errors.error'), message: window.i18n.t('errors.noVersion') }); switchPage('downloads');
         return;
     }
 
@@ -1590,7 +1533,7 @@ async function launchGame() {
         const result = await window.electronAPI.launchGame(options);
 
         if (!result.success) {
-            alert(window.i18n.t('errors.launchFailed') + ': ' + result.error);
+            await showMainModal({ title: window.i18n.t('errors.error'), message: window.i18n.t('errors.launchFailed') + ': ' + result.error });
             state.isLaunching = false;
             elements.launchBtn.disabled = false;
             elements.progressContainer.classList.add('hidden');
@@ -1711,7 +1654,13 @@ function renderProfilesManagement(profiles) {
             e.stopPropagation();
 
             try {
-                if (confirm(window.i18n.t('home.deleteConfirm'))) {
+                const result = await showMainModal({
+                    title: window.i18n.t('profiles.delete') || 'Delete Profile',
+                    message: window.i18n.t('home.deleteConfirm'),
+                    type: 'confirm'
+                });
+
+                if (result.success) {
                     const success = await window.electronAPI.deleteProfile(parseInt(index));
 
                     if (success) {
@@ -1721,7 +1670,7 @@ function renderProfilesManagement(profiles) {
                             showToast(window.i18n.t('home.deleteSuccess') || 'Profile deleted', 'success');
                         }
                     } else {
-                        alert('Could not delete profile');
+                        await showMainModal({ title: window.i18n.t('errors.error'), message: 'Could not delete profile' });
                     }
                 }
             } catch (err) { }

@@ -1274,6 +1274,14 @@ ipcMain.handle('launch-game', async (event, options) => {
                 if (!success) {
                     return { success: false, error: t('errors.javaDownloadFailed') };
                 }
+                
+                // After successful download, find and save the Java path
+                const javaPath = findJavaPath();
+                if (javaPath) {
+                    store.set('settings.javaPath', javaPath);
+                } else {
+                    return { success: false, error: t('errors.javaNotFoundAfterDownload') || 'Java downloaded but not found. Please restart the launcher.' };
+                }
             } else {
                 return { success: false, error: t('errors.javaRequired') };
             }
