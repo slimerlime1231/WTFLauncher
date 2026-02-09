@@ -3,3 +3,5 @@ assets/
 dist/
 .DS_Store
 *.log
+.build.js
+.electron-builder.json

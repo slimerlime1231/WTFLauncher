@@ -1,0 +1,30 @@
+{
+  "appId": "com.wtflauncher.app",
+  "productName": "WTFLauncher",
+  "directories": {
+    "output": "dist"
+  },
+  "npmRebuild": false,
+  "buildDependenciesFromSource": false,
+  "win": {
+    "target": [
+      "portable",
+      "nsis"
+    ],
+    "icon": "assets/applogo1.png"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
+  },
+
+  "files": [
+    "main.js",
+    "preload.js",
+    "package.json",
+    "src/**/*",
+    "assets/**/*",
+    "node_modules/**/*"
+  ],
+  "asar": true
+}
