@@ -1,22 +1,18 @@
 const { contextBridge, ipcRenderer } = require('electron');
-
 contextBridge.exposeInMainWorld('electronAPI', {
     minimize: () => ipcRenderer.send('window-minimize'),
     maximize: () => ipcRenderer.send('window-maximize'),
     close: () => ipcRenderer.send('window-close'),
-
     getSettings: () => ipcRenderer.invoke('get-settings'),
     saveSettings: (settings) => ipcRenderer.invoke('save-settings', settings),
     selectFolder: () => ipcRenderer.invoke('select-folder'),
     selectFile: (options) => ipcRenderer.invoke('select-file', options),
     openFolder: (path) => ipcRenderer.invoke('open-folder', path),
     selectIcon: () => ipcRenderer.invoke('select-icon'),
-
     checkJava: () => ipcRenderer.invoke('check-java'),
     askDownloadJava: () => ipcRenderer.invoke('ask-download-java'),
     downloadJava: () => ipcRenderer.invoke('download-java'),
     onJavaDownloadProgress: (callback) => ipcRenderer.on('java-download-progress', (event, data) => callback(data)),
-
     getAccounts: () => ipcRenderer.invoke('get-accounts'),
     getSelectedAccount: () => ipcRenderer.invoke('get-selected-account'),
     saveAccounts: (accounts) => ipcRenderer.invoke('save-accounts', accounts),
@@ -24,7 +20,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     loginMicrosoft: () => ipcRenderer.invoke('login-microsoft'),
     loginOffline: (username) => ipcRenderer.invoke('login-offline', username),
     removeAccount: (accountId) => ipcRenderer.invoke('remove-account', accountId),
-
     getVersions: () => ipcRenderer.invoke('get-versions'),
     getFabricVersions: (mcVersion) => ipcRenderer.invoke('get-fabric-versions', mcVersion),
     getForgeVersions: (mcVersion) => ipcRenderer.invoke('get-forge-versions', mcVersion),
@@ -42,9 +37,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     deleteProfile: (index) => ipcRenderer.invoke('delete-profile', index),
     getServers: () => ipcRenderer.invoke('get-servers'),
     getServerStatus: (ip) => ipcRenderer.invoke('get-server-status', ip),
-
     getNews: () => ipcRenderer.invoke('get-news'),
-
     launchGame: (options) => ipcRenderer.invoke('launch-game', options),
     stopGame: () => ipcRenderer.invoke('stop-game'),
     onLaunchProgress: (callback) => ipcRenderer.on('launch-progress', (event, data) => callback(data)),
@@ -52,7 +45,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     onGameLog: (callback) => ipcRenderer.on('game-log', (event, data) => callback(data)),
     onGameStarted: (callback) => ipcRenderer.on('game-started', (event, data) => callback(data)),
     onGameClosed: (callback) => ipcRenderer.on('game-closed', (event, code) => callback(code)),
-
     getAppPath: () => ipcRenderer.invoke('get-app-path'),
     openExternal: (url) => ipcRenderer.invoke('open-external', url)
 });

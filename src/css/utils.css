@@ -1,19 +1,16 @@
 .hidden {
   display: none !important;
 }
-
 .main-container.blur {
   filter: blur(5px);
   pointer-events: none;
 }
-
 .login-overlay,
 .modal,
 #custom-modal {
   z-index: 20000 !important;
   pointer-events: auto !important;
 }
-
 input,
 textarea {
   -webkit-app-region: no-drag !important;
@@ -22,10 +19,8 @@ textarea {
   cursor: text !important;
   pointer-events: auto !important;
   z-index: 10000 !important;
-
   position: relative;
 }
-
 .offline-input {
   user-select: text !important;
   -webkit-user-select: text !important;
